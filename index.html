@@ -7,80 +7,83 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui, sans-serif;
-        }
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    }
 
         :root {
-            --primary: #2e7d32;
-            --secondary: #1b5e20;
-            --accent: #4caf50;
-            --light: #f8f9fa;
-            --dark: #212529;
-            --gray: #6c757d;
-            --navbar-height: 70px;
-            --transition: all 0.3s ease;
-        }
+        --primary: #2e7d32;
+        --primary-light: #4caf50;
+        --secondary: #1b5e20;
+        --accent: #fb8c00; /* Warna kontras untuk aksi penting */
+        --bg-body: #f0f2f5;
+        --white: #ffffff;
+        --dark: #1a1c1e;
+        --gray: #64748b;
+        --navbar-height: 75px;
+        --radius: 16px;
+        --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+    }
 
-        body {
-            background-color: #f5f7ff;
-            color: var(--dark);
-            min-height: 100vh;
-            padding-bottom: var(--navbar-height);
-        }
+       body {
+        background-color: var(--bg-body);
+        color: var(--dark);
+        line-height: 1.6;
+        padding-bottom: calc(var(--navbar-height) + 20px);
+    }
 
         /* NAVBAR BAWAH - ICON SAJA */
-        #bottom-navbar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: var(--navbar-height);
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            z-index: 1000;
-            box-shadow: 0 -3px 15px rgba(0, 0, 0, 0.1);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
+      #bottom-navbar {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        max-width: 500px;
+        height: var(--navbar-height);
+        background: rgba(27, 94, 32, 0.95);
+        backdrop-filter: blur(10px);
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        z-index: 1000;
+        border-radius: 25px;
+        box-shadow: var(--shadow-lg);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
 
-        .nav-icon {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 70px;
-            height: 100%;
-            color: white;
-            cursor: pointer;
-            transition: var(--transition);
-            text-decoration: none;
-            position: relative;
-            padding: 10px 0;
-        }
+       .nav-icon {
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
         .nav-icon:hover {
             background-color: rgba(255, 255, 255, 0.1);
         }
 
-        .nav-icon.active {
-            background-color: rgba(255, 255, 255, 0.15);
-            border-top: 3px solid var(--accent);
-        }
+       .nav-icon.active {
+        color: var(--white);
+        transform: translateY(-5px);
+    }
 
-        .nav-icon i {
-            font-size: 1.4rem;
-            margin-bottom: 5px;
-        }
+       .nav-icon i {
+        font-size: 1.5rem;
+        margin-bottom: 4px;
+    }
 
-        .nav-icon span {
-            font-size: 0.7rem;
-            font-weight: 500;
-            text-align: center;
-        }
+       .nav-icon span {
+        font-size: 0.65rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
 
         .nav-icon i.fa-home,
         .nav-icon i.fa-bookmark {
@@ -113,22 +116,24 @@
         }
 
         .top-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #eaeaea;
-        }
+        padding: 40px 20px 20px;
+        text-align: center;
+        background: linear-gradient(to bottom, #e8f5e9, var(--bg-body));
+    }
 
-        .page-title h1 {
-            font-size: 1.8rem;
-            color: var(--secondary);
-        }
+       .page-title h1 {
+        font-size: 2rem;
+        font-weight: 800;
+        background: linear-gradient(45deg, var(--secondary), var(--primary-light));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 8px;
+    }
 
         .page-title p {
             color: var(--gray);
             margin-top: 5px;
+            
         }
 
         .user-menu {
