@@ -13,7 +13,7 @@
         font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
     }
 
-        :root {
+    :root {
         --primary: #2e7d32;
         --primary-light: #4caf50;
         --secondary: #1b5e20;
@@ -28,7 +28,7 @@
         --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
     }
 
-       body {
+    body {
         background-color: var(--bg-body);
         color: var(--dark);
         line-height: 1.6;
@@ -36,54 +36,55 @@
     }
 
         /* NAVBAR BAWAH - ICON SAJA */
-      #bottom-navbar {
-        position: fixed;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 90%;
-        max-width: 500px;
-        height: var(--navbar-height);
-        background: rgba(27, 94, 32, 0.95);
-        backdrop-filter: blur(10px);
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        z-index: 1000;
-        border-radius: 25px;
-        box-shadow: var(--shadow-lg);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-    }
+        #bottom-navbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: var(--navbar-height);
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 -3px 15px rgba(0, 0, 0, 0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
 
-       .nav-icon {
-        color: rgba(255, 255, 255, 0.7);
-        text-decoration: none;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
+        .nav-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 70px;
+            height: 100%;
+            color: white;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            position: relative;
+            padding: 10px 0;
+        }
 
         .nav-icon:hover {
             background-color: rgba(255, 255, 255, 0.1);
         }
 
-       .nav-icon.active {
-        color: var(--white);
-        transform: translateY(-5px);
-    }
+        .nav-icon.active {
+            background-color: rgba(255, 255, 255, 0.15);
+            border-top: 3px solid var(--accent);
+        }
 
-       .nav-icon i {
-        font-size: 1.5rem;
-        margin-bottom: 4px;
-    }
+        .nav-icon i {
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+        }
 
-       .nav-icon span {
-        font-size: 0.65rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-    }
+        .nav-icon span {
+            font-size: 0.7rem;
+            font-weight: 500;
+            text-align: center;
+        }
 
         .nav-icon i.fa-home,
         .nav-icon i.fa-bookmark {
@@ -133,7 +134,6 @@
         .page-title p {
             color: var(--gray);
             margin-top: 5px;
-            
         }
 
         .user-menu {
@@ -4046,3 +4046,4 @@
     </script>
 </body>
 </html>
+
