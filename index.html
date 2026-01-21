@@ -1,0 +1,1690 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RUANG TI - Platform Pembelajaran Teknik Industri</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        :root {
+            --primary: #2e7d32;
+            --secondary: #1b5e20;
+            --accent: #4caf50;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --sidebar-width: 280px;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: #f5f7ff;
+            color: var(--dark);
+            min-height: 100vh;
+            padding-left: var(--sidebar-width); /* Tambahkan padding untuk sidebar fixed */
+            transition: var(--transition);
+        }
+
+        /* SIDEBAR - SELALU TETAP DI ATAS */
+        #sidebar {
+            width: var(--sidebar-width);
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+            color: white;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            padding: 25px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .sidebar-header h2 {
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            text-align: center;
+        }
+
+        .sidebar-header p {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            text-align: center;
+        }
+
+        .sidebar-menu {
+            padding: 20px 0;
+            flex-grow: 1;
+        }
+
+        .menu-item {
+            padding: 15px 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: var(--transition);
+            border-left: 4px solid transparent;
+            text-decoration: none;
+            color: white;
+            position: relative;
+        }
+
+        .menu-item:hover, .menu-item.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-left-color: var(--accent);
+        }
+
+        .menu-item i {
+            font-size: 1.2rem;
+            width: 24px;
+            text-align: center;
+        }
+
+        .menu-item span {
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        .menu-divider {
+            height: 1px;
+            background-color: rgba(255, 255, 255, 0.1);
+            margin: 15px 25px;
+        }
+
+        .sidebar-footer {
+            padding: 20px;
+            text-align: center;
+            font-size: 0.8rem;
+            opacity: 0.7;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* HAPUS TOMBOL TOGGLE SIDEBAR DARI HEADER */
+        .toggle-sidebar {
+            display: none;
+        }
+
+        /* MAIN CONTENT */
+        #main-content {
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eaeaea;
+        }
+
+        .page-title h1 {
+            font-size: 1.8rem;
+            color: var(--secondary);
+        }
+
+        .page-title p {
+            color: var(--gray);
+            margin-top: 5px;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .search-box {
+            background-color: white;
+            padding: 10px 15px;
+            border-radius: 50px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search-box input {
+            border: none;
+            outline: none;
+            min-width: 200px;
+        }
+
+        .user-profile {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* WELCOME SECTION */
+        .welcome-section {
+            background-color: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+
+        .welcome-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .welcome-header h2 {
+            font-size: 2.2rem;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+
+        .welcome-header p {
+            font-size: 1.1rem;
+            color: var(--gray);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .welcome-content {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .welcome-card {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 25px;
+            border-left: 5px solid var(--primary);
+        }
+
+        .welcome-card h3 {
+            font-size: 1.4rem;
+            color: var(--secondary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .welcome-card p {
+            color: #555;
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        /* CATEGORY SECTION */
+        .category-section {
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            display: none;
+        }
+
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .category-header h2 {
+            font-size: 1.8rem;
+            color: var(--secondary);
+        }
+
+        .category-header p {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+
+        .playlists-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .playlist-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            border: 1px solid #eee;
+            cursor: pointer;
+        }
+
+        .playlist-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .playlist-thumbnail {
+            height: 180px;
+            background-color: #eaeaea;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .playlist-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .playlist-card:hover .playlist-thumbnail img {
+            transform: scale(1.05);
+        }
+
+        .playlist-video-count {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        .playlist-content {
+            padding: 20px;
+        }
+
+        .playlist-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--dark);
+            line-height: 1.4;
+        }
+
+        .playlist-description {
+            color: var(--gray);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .playlist-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+
+        /* VIDEO PLAYER SECTION */
+        .video-section {
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            display: none;
+        }
+
+        .video-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .video-section-header h2 {
+            font-size: 1.5rem;
+            color: var(--secondary);
+        }
+
+        .back-to-playlist {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .back-to-playlist:hover {
+            background-color: var(--secondary);
+        }
+
+        .video-player-container {
+            background-color: #0a0a0a;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 500px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .video-placeholder {
+            text-align: center;
+            color: #aaa;
+            padding: 30px;
+        }
+
+        .video-placeholder i {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .video-player {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: none;
+        }
+
+        .video-info {
+            padding: 15px 0;
+        }
+
+        .video-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .video-meta {
+            display: flex;
+            gap: 20px;
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .video-description {
+            line-height: 1.6;
+            color: #555;
+        }
+
+        /* VIDEOS LIST SECTION */
+        .videos-section {
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            display: none;
+        }
+
+        .videos-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .video-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            cursor: pointer;
+            transition: var(--transition);
+            border-left: 4px solid transparent;
+        }
+
+        .video-item:hover {
+            background-color: #f0f0f0;
+            transform: translateX(5px);
+        }
+
+        .video-item.active {
+            background-color: rgba(46, 125, 50, 0.1);
+            border-left-color: var(--primary);
+        }
+
+        .video-number {
+            width: 30px;
+            height: 30px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .video-item-content {
+            flex: 1;
+        }
+
+        .video-item-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+
+        .video-item-meta {
+            display: flex;
+            gap: 15px;
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+
+        .video-item-duration {
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .bookmark-btn-small {
+            background: none;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: var(--transition);
+            padding: 5px;
+        }
+
+        .bookmark-btn-small:hover {
+            color: var(--primary);
+        }
+
+        .bookmark-btn-small.bookmarked {
+            color: #ffd700;
+        }
+
+        /* BOOKMARK COUNTER */
+        .bookmark-counter {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #ff4757;
+            color: white;
+            font-size: 0.7rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* NO CONTENT MESSAGE */
+        .no-content {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 50px 20px;
+        }
+        
+        .no-content i {
+            font-size: 3rem;
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        
+        .no-content h3 {
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+        
+        .no-content p {
+            color: var(--gray);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* RESPONSIVE DESIGN - TABLET & MOBILE */
+        @media (max-width: 1024px) {
+            body {
+                padding-left: 0; /* Hapus padding di mobile/tablet */
+            }
+            
+            #sidebar {
+                transform: translateX(-100%); /* Sembunyikan sidebar di kiri */
+                transition: transform 0.3s ease;
+            }
+            
+            #sidebar.active {
+                transform: translateX(0); /* Tampilkan saat aktif */
+            }
+            
+            /* MOBILE TOGGLE BUTTON */
+            .mobile-toggle {
+                display: flex;
+                position: fixed;
+                top: 20px;
+                left: 20px;
+                z-index: 1001;
+                background-color: var(--primary);
+                color: white;
+                width: 50px;
+                height: 50px;
+                border-radius: 10px;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.5rem;
+                cursor: pointer;
+                box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+                border: none;
+            }
+            
+            /* OVERLAY UNTUK MOBILE */
+            #sidebar-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+                display: none;
+            }
+            
+            #sidebar-overlay.active {
+                display: block;
+            }
+            
+            .playlists-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .video-player-container {
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .video-player-container {
+                height: 300px;
+            }
+            
+            .playlists-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .top-bar {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .search-box input {
+                min-width: 150px;
+            }
+            
+            .welcome-header h2 {
+                font-size: 1.8rem;
+            }
+            
+            .welcome-card {
+                padding: 20px;
+            }
+            
+            .video-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .video-item-meta {
+                flex-wrap: wrap;
+            }
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- SIDEBAR OVERLAY FOR MOBILE -->
+    <div id="sidebar-overlay"></div>
+    
+    <!-- SIDEBAR NAVIGASI - SELALU TETAP -->
+    <div id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo-container">
+                <div class="logo">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+                <h2><span>RUANG TI</span></h2>
+            </div>
+            <p>Platform Pembelajaran Teknik Industri</p>
+        </div>
+        
+        <div class="sidebar-menu">
+            <a href="#" class="menu-item active" data-section="dashboard">
+                <i class="fas fa-home"></i>
+                <span>Dashboard</span>
+            </a>
+            
+            <div class="menu-divider"></div>
+            
+            <a href="#" class="menu-item" data-section="negotiation">
+                <i class="fas fa-handshake"></i>
+                <span>Negotiation</span>
+            </a>
+            
+            <a href="#" class="menu-item" data-section="data-science">
+                <i class="fas fa-chart-bar"></i>
+                <span>Data Science</span>
+            </a>
+            
+            <a href="#" class="menu-item" data-section="supply-chain">
+                <i class="fas fa-truck-loading"></i>
+                <span>Supply Chain Management</span>
+            </a>
+            
+            <a href="#" class="menu-item" data-section="project-management">
+                <i class="fas fa-project-diagram"></i>
+                <span>Project Management</span>
+            </a>
+            
+            <div class="menu-divider"></div>
+            
+            <a href="#" class="menu-item" data-section="bookmarks" id="bookmarksMenuItem">
+                <i class="fas fa-bookmark"></i>
+                <span>Bookmarks</span>
+                <span class="bookmark-counter" id="bookmarkCounter" style="display: none;">0</span>
+            </a>
+        </div>
+        
+        <div class="sidebar-footer">
+            <p>&copy; 2026 RUANG TI</p>
+            <p>v2.1.0</p>
+        </div>
+    </div>
+    
+    <!-- MOBILE TOGGLE BUTTON (Hanya muncul di mobile/tablet) -->
+    <button class="mobile-toggle" id="mobileToggle">
+        <i class="fas fa-bars"></i>
+    </button>
+    
+    <!-- MAIN CONTENT -->
+    <main id="main-content">
+        <div class="top-bar">
+            <div class="page-title">
+                <h1 id="pageTitle">Dashboard</h1>
+                <p id="pageSubtitle">Upgrade Skill Teknik Industri Kamu di RUANG TI!</p>
+            </div>
+            
+            <div class="user-menu">
+                <div class="search-box" id="searchBox" style="display: none;">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Cari video...">
+                </div>
+                <div class="user-profile">
+                    <span>RT</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- DASHBOARD WELCOME SECTION -->
+        <section class="welcome-section fade-in" id="welcomeSection">
+            <div class="welcome-header">
+                <h2>Upgrade Skill Teknik Industri Kamu di RUANG TI! 🛠️</h2>
+                <p>Pernah merasa kesulitan memahami teori di ruang kuliah? RUANG TI hadir untuk mengubah cara kamu belajar.</p>
+            </div>
+            
+            <div class="welcome-content">
+                <div class="welcome-card">
+                    <h3><i class="fas fa-graduation-cap"></i> Pembelajaran Terarah</h3>
+                    <p>Kami menyediakan video pembelajaran berkualitas yang mengupas tuntas kurikulum Teknik Industri—mulai dari dasar-dasar manufaktur hingga analisis sistem yang rumit. Setiap materi disusun secara sistematis untuk memudahkan pemahaman.</p>
+                </div>
+                
+                <div class="welcome-card">
+                    <h3><i class="fas fa-clock"></i> Fleksibel dan Aksesibel</h3>
+                    <p>Belajar kapan saja, di mana saja. RUANG TI memungkinkan kamu mengakses materi pembelajaran sesuai jadwal dan kebutuhanmu. Tidak perlu khawatir ketinggalan pelajaran karena semua materi tersedia 24/7.</p>
+                </div>
+                
+                <div class="welcome-card">
+                    <h3><i class="fas fa-trophy"></i> Jadilah yang Terdepan</h3>
+                    <p>Dengan konten yang selalu diperbarui sesuai perkembangan industri, RUANG TI membantu kamu menjadi yang terdepan di kelas. Tingkatkan kompetensimu dan siapkan diri untuk menghadapi tantangan dunia kerja.</p>
+                </div>
+                
+                <div class="welcome-card">
+                    <h3><i class="fas fa-bullseye"></i> Visi Kami</h3>
+                    <p>RUANG TI: Belajar Teknik Industri Jadi Lebih Dekat dan Terarah. Kami berkomitmen untuk menyediakan platform pembelajaran yang efektif, efisien, dan relevan dengan kebutuhan mahasiswa Teknik Industri masa kini.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- CATEGORY SECTION (PLAYLISTS) -->
+        <section class="category-section" id="categorySection">
+            <div class="category-header">
+                <div>
+                    <h2 id="categoryTitle">Kategori</h2>
+                    <p id="categorySubtitle">Pilih playlist untuk mulai belajar</p>
+                </div>
+            </div>
+            
+            <div class="playlists-grid" id="playlistsGrid">
+                <!-- Playlists akan dimuat melalui JavaScript -->
+            </div>
+        </section>
+        
+        <!-- VIDEO PLAYER SECTION -->
+        <section class="video-section" id="videoSection">
+            <div class="video-section-header">
+                <div>
+                    <h2 id="videoSectionTitle">Pemutar Video</h2>
+                    <p id="currentPlaylistTitle" style="color: var(--gray); font-size: 0.9rem; margin-top: 5px;"></p>
+                </div>
+                <button class="back-to-playlist" id="backToPlaylist">
+                    <i class="fas fa-arrow-left"></i> Kembali ke Playlist
+                </button>
+            </div>
+            
+            <div class="video-player-container">
+                <div class="video-placeholder" id="videoPlaceholder">
+                    <i class="fas fa-play-circle"></i>
+                    <h3>Pilih video dari daftar di samping</h3>
+                    <p>Video akan dimuat dan diputar langsung dari Google Drive</p>
+                </div>
+                <iframe class="video-player" id="videoPlayer" allow="autoplay; fullscreen" allowfullscreen></iframe>
+            </div>
+            
+            <div class="video-info" id="videoInfo">
+                <h3 id="videoTitle">Belum ada video yang dipilih</h3>
+                <div class="video-meta" id="videoMeta">
+                    <span><i class="far fa-clock"></i> --:--</span>
+                    <span><i class="far fa-calendar"></i> -- --- ----</span>
+                    <span><i class="fas fa-eye"></i> --- views</span>
+                </div>
+                <p class="video-description" id="videoDescription">Pilih video dari daftar di samping untuk melihat deskripsi lengkap</p>
+            </div>
+        </section>
+        
+        <!-- VIDEOS LIST SECTION -->
+        <section class="videos-section" id="videosSection">
+            <div class="category-header">
+                <div>
+                    <h2 id="videosListTitle">Daftar Video</h2>
+                    <p id="videosListSubtitle">Klik video untuk mulai menonton</p>
+                </div>
+                <div class="bookmark-info" id="bookmarkInfo" style="display: none;">
+                    <span id="bookmarkCount">0</span> video dibookmark
+                </div>
+            </div>
+            
+            <div class="videos-list" id="videosList">
+                <!-- Video list akan dimuat melalui JavaScript -->
+            </div>
+        </section>
+    </main>
+    
+    <script>
+        // Data playlist dan video
+        const playlistsData = {
+            "negotiation": {
+                title: "Negotiation",
+                description: "Pelajari teknik negosiasi efektif untuk berbagai situasi industri",
+                playlists: [
+                    {
+                        id: "negotiation-1",
+                        title: "Teknik Negosiasi Efektif dalam Industri",
+                        description: "Pelajari teknik negosiasi efektif yang dapat diterapkan dalam berbagai situasi industri.",
+                        thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                        instructor: "Dr. Ahmad Kurniawan",
+                        videos: [
+                            {
+                                id: 101,
+                                title: "Pengenalan Negosiasi dalam Industri",
+                                description: "Pengenalan konsep dasar negosiasi dan penerapannya dalam konteks industri.",
+                                duration: "15:30",
+                                date: "10 Jan 2024",
+                                views: "1.2k",
+                                driveId: "1YgYMgc3E6jqB9e9qQZQ7TQ9XqZQ7TQ9X",
+                                bookmarked: false
+                            }
+                        ]
+                    }
+                ]
+            },
+            "data-science": {
+                title: "Data Science",
+                description: "Penguasaan analisis data untuk pengambilan keputusan industri",
+                playlists: [
+                    {
+                        id: "data-science-1",
+                        title: "Analisis Data dengan Python untuk Teknik Industri",
+                        description: "Pengenalan analisis data menggunakan Python dengan fokus pada aplikasi dalam teknik industri.",
+                        thumbnail: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                        instructor: "Prof. Budi Santoso",
+                        videos: [
+                            {
+                                id: 201,
+                                title: "Pengenalan Python untuk Analisis Data",
+                                description: "Dasar-dasar Python dan library untuk analisis data industri.",
+                                duration: "20:15",
+                                date: "5 Mar 2024",
+                                views: "2.1k",
+                                driveId: "1YgYMgc3E6jqB9e9qQZQ7TQ9XqZQ7TQ9H",
+                                bookmarked: false
+                            }
+                        ]
+                    }
+                ]
+            },
+            "supply-chain": {
+                title: "Supply Chain Management",
+                description: "Pengelolaan rantai pasok untuk efisiensi operasional",
+                playlists: [
+                    {
+                        id: "supply-chain-1",
+                        title: "Manajemen Rantai Pasok Modern",
+                        description: "Konsep dan implementasi manajemen rantai pasok modern dalam industri.",
+                        thumbnail: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                        instructor: "Dr. Cindy Wijaya",
+                        videos: [
+                            {
+                                id: 301,
+                                title: "Konsep Dasar Supply Chain Management",
+                                description: "Pengenalan konsep dan komponen utama supply chain management.",
+                                duration: "17:25",
+                                date: "10 May 2024",
+                                views: "2.2k",
+                                driveId: "1YgYMgc3E6jqB9e9qQZQ7TQ9XqZQ7TQ9R",
+                                bookmarked: false
+                            }
+                        ]
+                    }
+                ]
+            },
+            "project-management": {
+                title: "Project Management",
+                description: "Pengelolaan proyek teknik industri yang efektif",
+                playlists: [
+                    {
+                        id: "project-management-1",
+                        title: "Manajemen Proyek Teknik Industri",
+                        description: "Panduan lengkap manajemen proyek untuk mahasiswa teknik industri.",
+                        thumbnail: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                        instructor: "Ir. Dedi Pratama",
+                        videos: [
+                            {
+                                id: 401,
+                                title: "Pengenalan Manajemen Proyek",
+                                description: "Konsep dasar dan framework manajemen proyek teknik industri.",
+                                duration: "16:40",
+                                date: "1 Jun 2024",
+                                views: "2.3k",
+                                driveId: "1YgYMgc3E6jqB9e9qQZQ7TQ9XqZQ7TQ9W",
+                                bookmarked: false
+                            }
+                        ]
+                    }
+                ]
+            }
+        };
+
+        // Bookmark manager
+        const bookmarkManager = {
+            getBookmarks: function() {
+                const bookmarks = localStorage.getItem('ruangTiBookmarks');
+                return bookmarks ? JSON.parse(bookmarks) : [];
+            },
+            
+            saveBookmarks: function(bookmarks) {
+                localStorage.setItem('ruangTiBookmarks', JSON.stringify(bookmarks));
+            },
+            
+            addBookmark: function(videoId) {
+                const bookmarks = this.getBookmarks();
+                if (!bookmarks.includes(videoId)) {
+                    bookmarks.push(videoId);
+                    this.saveBookmarks(bookmarks);
+                    this.updateBookmarkCount();
+                    return true;
+                }
+                return false;
+            },
+            
+            removeBookmark: function(videoId) {
+                let bookmarks = this.getBookmarks();
+                const index = bookmarks.indexOf(videoId);
+                if (index > -1) {
+                    bookmarks.splice(index, 1);
+                    this.saveBookmarks(bookmarks);
+                    this.updateBookmarkCount();
+                    return true;
+                }
+                return false;
+            },
+            
+            isBookmarked: function(videoId) {
+                const bookmarks = this.getBookmarks();
+                return bookmarks.includes(videoId);
+            },
+            
+            updateBookmarkCount: function() {
+                const bookmarks = this.getBookmarks();
+                const bookmarkCounter = document.getElementById('bookmarkCounter');
+                
+                if (bookmarks.length > 0) {
+                    bookmarkCounter.textContent = bookmarks.length;
+                    bookmarkCounter.style.display = 'flex';
+                } else {
+                    bookmarkCounter.style.display = 'none';
+                }
+            }
+        };
+
+        // State aplikasi
+        let currentState = {
+            activeCategory: null,
+            activePlaylist: null,
+            activeVideo: null
+        };
+
+        // Setup mobile navigation
+        function setupMobileNavigation() {
+            const sidebar = document.getElementById('sidebar');
+            const mobileToggle = document.getElementById('mobileToggle');
+            const sidebarOverlay = document.getElementById('sidebar-overlay');
+            const menuItems = document.querySelectorAll('.menu-item');
+            
+            // Toggle sidebar on mobile button click
+            mobileToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleSidebar();
+            });
+            
+            // Close sidebar when clicking overlay
+            sidebarOverlay.addEventListener('click', () => {
+                closeSidebar();
+            });
+            
+            // Close sidebar when clicking menu items on mobile
+            menuItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    if (window.innerWidth <= 1024) {
+                        closeSidebar();
+                    }
+                });
+            });
+            
+            // Close sidebar when pressing Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closeSidebar();
+                }
+            });
+            
+            function toggleSidebar() {
+                const isOpening = !sidebar.classList.contains('active');
+                
+                if (isOpening) {
+                    sidebar.classList.add('active');
+                    sidebarOverlay.classList.add('active');
+                    mobileToggle.innerHTML = '<i class="fas fa-times"></i>';
+                } else {
+                    closeSidebar();
+                }
+            }
+            
+            function closeSidebar() {
+                sidebar.classList.remove('active');
+                sidebarOverlay.classList.remove('active');
+                mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+            
+            // Initial setup based on screen size
+            if (window.innerWidth > 1024) {
+                mobileToggle.style.display = 'none';
+            } else {
+                mobileToggle.style.display = 'flex';
+            }
+            
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 1024) {
+                    mobileToggle.style.display = 'none';
+                    closeSidebar();
+                } else {
+                    mobileToggle.style.display = 'flex';
+                }
+            });
+        }
+
+        // Load playlists
+        function loadPlaylists(categoryId) {
+            const category = playlistsData[categoryId];
+            if (!category) return;
+            
+            const playlistsGrid = document.getElementById('playlistsGrid');
+            playlistsGrid.innerHTML = '';
+            
+            category.playlists.forEach(playlist => {
+                const playlistCard = document.createElement('div');
+                playlistCard.className = 'playlist-card';
+                playlistCard.dataset.id = playlist.id;
+                
+                playlistCard.innerHTML = `
+                    <div class="playlist-thumbnail">
+                        <img src="${playlist.thumbnail}" alt="${playlist.title}">
+                        <div class="playlist-video-count">${playlist.videos.length} video</div>
+                    </div>
+                    <div class="playlist-content">
+                        <h3 class="playlist-title">${playlist.title}</h3>
+                        <p class="playlist-description">${playlist.description}</p>
+                        <div class="playlist-meta">
+                            <span><i class="fas fa-user"></i> ${playlist.instructor}</span>
+                            <span><i class="fas fa-clock"></i> ${calculateTotalDuration(playlist.videos)}</span>
+                        </div>
+                    </div>
+                `;
+                
+                playlistCard.addEventListener('click', () => {
+                    openPlaylist(categoryId, playlist.id);
+                });
+                
+                playlistsGrid.appendChild(playlistCard);
+            });
+            
+            document.getElementById('categoryTitle').textContent = category.title;
+            document.getElementById('categorySubtitle').textContent = category.description;
+            document.getElementById('categorySection').style.display = 'block';
+        }
+
+        function calculateTotalDuration(videos) {
+            let totalSeconds = 0;
+            
+            videos.forEach(video => {
+                const [minutes, seconds] = video.duration.split(':').map(Number);
+                totalSeconds += minutes * 60 + seconds;
+            });
+            
+            const hours = Math.floor(totalSeconds / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            
+            if (hours > 0) {
+                return `${hours} jam ${minutes} menit`;
+            } else {
+                return `${minutes} menit`;
+            }
+        }
+
+        function openPlaylist(categoryId, playlistId) {
+            const category = playlistsData[categoryId];
+            if (!category) return;
+            
+            const playlist = category.playlists.find(p => p.id === playlistId);
+            if (!playlist) return;
+            
+            currentState.activeCategory = categoryId;
+            currentState.activePlaylist = playlistId;
+            
+            document.getElementById('categorySection').style.display = 'none';
+            document.getElementById('videoSection').style.display = 'block';
+            document.getElementById('videosSection').style.display = 'block';
+            document.getElementById('searchBox').style.display = 'flex';
+            
+            document.getElementById('videoSectionTitle').textContent = playlist.title;
+            document.getElementById('currentPlaylistTitle').textContent = `Playlist: ${playlist.title}`;
+            document.getElementById('videosListTitle').textContent = playlist.title;
+            document.getElementById('videosListSubtitle').textContent = `Pilih video untuk mulai belajar (${playlist.videos.length} video)`;
+            
+            loadVideosList(playlist.videos);
+            
+            if (playlist.videos.length > 0) {
+                playVideo(playlist.videos[0]);
+                
+                const firstVideoItem = document.querySelector('.video-item');
+                if (firstVideoItem) {
+                    firstVideoItem.classList.add('active');
+                }
+            }
+        }
+
+        function loadVideosList(videos) {
+            const videosList = document.getElementById('videosList');
+            videosList.innerHTML = '';
+            
+            videos.forEach(video => {
+                video.bookmarked = bookmarkManager.isBookmarked(video.id);
+            });
+            
+            videos.forEach((video, index) => {
+                const videoItem = document.createElement('div');
+                videoItem.className = 'video-item';
+                videoItem.dataset.id = video.id;
+                
+                videoItem.innerHTML = `
+                    <div class="video-number">${index + 1}</div>
+                    <div class="video-item-content">
+                        <div class="video-item-title">${video.title}</div>
+                        <div class="video-item-meta">
+                            <span class="video-item-duration"><i class="far fa-clock"></i> ${video.duration}</span>
+                            <span><i class="far fa-calendar"></i> ${video.date}</span>
+                            <span><i class="fas fa-eye"></i> ${video.views}</span>
+                        </div>
+                    </div>
+                    <button class="bookmark-btn-small ${video.bookmarked ? 'bookmarked' : ''}" data-id="${video.id}">
+                        <i class="${video.bookmarked ? 'fas' : 'far'} fa-bookmark"></i>
+                    </button>
+                `;
+                
+                videoItem.addEventListener('click', (e) => {
+                    if (!e.target.closest('.bookmark-btn-small')) {
+                        playVideo(video);
+                        
+                        document.querySelectorAll('.video-item').forEach(item => {
+                            item.classList.remove('active');
+                        });
+                        videoItem.classList.add('active');
+                    }
+                });
+                
+                const bookmarkBtn = videoItem.querySelector('.bookmark-btn-small');
+                bookmarkBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    toggleBookmark(video.id, bookmarkBtn);
+                });
+                
+                videosList.appendChild(videoItem);
+            });
+        }
+
+        function playVideo(video) {
+            const videoPlaceholder = document.getElementById('videoPlaceholder');
+            const videoPlayer = document.getElementById('videoPlayer');
+            
+            const driveUrl = `https://drive.google.com/file/d/${video.driveId}/preview`;
+            
+            videoPlaceholder.style.display = 'none';
+            videoPlayer.style.display = 'block';
+            videoPlayer.src = driveUrl;
+            
+            document.getElementById('videoTitle').textContent = video.title;
+            document.getElementById('videoDescription').textContent = video.description;
+            
+            document.getElementById('videoMeta').innerHTML = `
+                <span><i class="far fa-clock"></i> ${video.duration}</span>
+                <span><i class="far fa-calendar"></i> ${video.date}</span>
+                <span><i class="fas fa-eye"></i> ${video.views} views</span>
+                <span><i class="${video.bookmarked ? 'fas' : 'far'} fa-bookmark"></i> ${video.bookmarked ? 'Sudah dibookmark' : 'Belum dibookmark'}</span>
+            `;
+            
+            currentState.activeVideo = video.id;
+        }
+
+        function toggleBookmark(videoId, button) {
+            const icon = button.querySelector('i');
+            
+            if (bookmarkManager.isBookmarked(videoId)) {
+                bookmarkManager.removeBookmark(videoId);
+                button.classList.remove('bookmarked');
+                icon.className = 'far fa-bookmark';
+            } else {
+                bookmarkManager.addBookmark(videoId);
+                button.classList.add('bookmarked');
+                icon.className = 'fas fa-bookmark';
+            }
+            
+            if (currentState.activeVideo === videoId) {
+                const videoMeta = document.getElementById('videoMeta');
+                const isBookmarked = bookmarkManager.isBookmarked(videoId);
+                const bookmarkSpan = videoMeta.querySelector('span:nth-child(4)');
+                if (bookmarkSpan) {
+                    bookmarkSpan.innerHTML = `<i class="${isBookmarked ? 'fas' : 'far'} fa-bookmark"></i> ${isBookmarked ? 'Sudah dibookmark' : 'Belum dibookmark'}`;
+                }
+            }
+            
+            showNotification(bookmarkManager.isBookmarked(videoId) ? 
+                "Video ditambahkan ke bookmark" : "Video dihapus dari bookmark");
+        }
+
+        function setupSidebarNavigation() {
+            const menuItems = document.querySelectorAll('.menu-item');
+            
+            menuItems.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    menuItems.forEach(i => i.classList.remove('active'));
+                    item.classList.add('active');
+                    
+                    const section = item.dataset.section;
+                    
+                    document.getElementById('welcomeSection').style.display = 'none';
+                    document.getElementById('categorySection').style.display = 'none';
+                    document.getElementById('videoSection').style.display = 'none';
+                    document.getElementById('videosSection').style.display = 'none';
+                    document.getElementById('searchBox').style.display = 'none';
+                    
+                    currentState = {
+                        activeCategory: null,
+                        activePlaylist: null,
+                        activeVideo: null
+                    };
+                    
+                    document.getElementById('videoPlaceholder').style.display = 'block';
+                    document.getElementById('videoPlayer').style.display = 'none';
+                    document.getElementById('videoPlayer').src = '';
+                    document.getElementById('videoTitle').textContent = 'Belum ada video yang dipilih';
+                    document.getElementById('videoDescription').textContent = 'Pilih video dari daftar di samping untuk melihat deskripsi lengkap';
+                    
+                    const pageTitle = document.getElementById('pageTitle');
+                    const pageSubtitle = document.getElementById('pageSubtitle');
+                    
+                    if (section === 'dashboard') {
+                        pageTitle.textContent = 'Dashboard';
+                        pageSubtitle.textContent = 'Upgrade Skill Teknik Industri Kamu di RUANG TI!';
+                        document.getElementById('welcomeSection').style.display = 'block';
+                    } 
+                    else if (section === 'bookmarks') {
+                        pageTitle.textContent = 'Bookmarks';
+                        pageSubtitle.textContent = 'Video yang telah Anda tandai';
+                        document.getElementById('videosSection').style.display = 'block';
+                        document.getElementById('searchBox').style.display = 'flex';
+                        document.getElementById('bookmarkInfo').style.display = 'block';
+                        document.getElementById('videosListTitle').textContent = 'Video Bookmark';
+                        document.getElementById('videosListSubtitle').textContent = 'Video yang telah Anda tandai';
+                        
+                        loadBookmarkedVideos();
+                    }
+                    else if (playlistsData[section]) {
+                        const category = playlistsData[section];
+                        pageTitle.textContent = category.title;
+                        pageSubtitle.textContent = category.description;
+                        document.getElementById('categorySection').style.display = 'block';
+                        
+                        loadPlaylists(section);
+                    }
+                });
+            });
+        }
+
+        function loadBookmarkedVideos() {
+            const bookmarks = bookmarkManager.getBookmarks();
+            const videosList = document.getElementById('videosList');
+            
+            let allVideos = [];
+            for (const categoryId in playlistsData) {
+                const category = playlistsData[categoryId];
+                for (const playlist of category.playlists) {
+                    const videosWithPlaylistInfo = playlist.videos.map(video => ({
+                        ...video,
+                        playlistTitle: playlist.title,
+                        playlistId: playlist.id,
+                        categoryId: categoryId
+                    }));
+                    allVideos = allVideos.concat(videosWithPlaylistInfo);
+                }
+            }
+            
+            const bookmarkedVideos = allVideos.filter(video => bookmarks.includes(video.id));
+            
+            document.getElementById('bookmarkCount').textContent = bookmarkedVideos.length;
+            
+            if (bookmarkedVideos.length === 0) {
+                videosList.innerHTML = `
+                    <div class="no-content">
+                        <i class="far fa-bookmark"></i>
+                        <h3>Tidak ada video yang dibookmark</h3>
+                        <p>Tambahkan video ke bookmark dengan mengklik ikon bookmark di samping setiap video.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            videosList.innerHTML = '';
+            
+            bookmarkedVideos.forEach((video, index) => {
+                const videoItem = document.createElement('div');
+                videoItem.className = 'video-item';
+                videoItem.dataset.id = video.id;
+                
+                videoItem.innerHTML = `
+                    <div class="video-number">${index + 1}</div>
+                    <div class="video-item-content">
+                        <div class="video-item-title">${video.title}</div>
+                        <div class="video-item-meta">
+                            <span class="video-item-duration"><i class="far fa-clock"></i> ${video.duration}</span>
+                            <span><i class="fas fa-tag"></i> ${video.playlistTitle}</span>
+                            <span><i class="far fa-calendar"></i> ${video.date}</span>
+                        </div>
+                    </div>
+                    <button class="bookmark-btn-small bookmarked" data-id="${video.id}">
+                        <i class="fas fa-bookmark"></i>
+                    </button>
+                `;
+                
+                videoItem.addEventListener('click', (e) => {
+                    if (!e.target.closest('.bookmark-btn-small')) {
+                        openPlaylist(video.categoryId, video.playlistId);
+                        
+                        setTimeout(() => {
+                            playVideo(video);
+                            
+                            document.querySelectorAll('.video-item').forEach(item => {
+                                item.classList.remove('active');
+                            });
+                            videoItem.classList.add('active');
+                        }, 100);
+                    }
+                });
+                
+                const bookmarkBtn = videoItem.querySelector('.bookmark-btn-small');
+                bookmarkBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    toggleBookmark(video.id, bookmarkBtn);
+                    
+                    setTimeout(() => {
+                        if (!bookmarkManager.isBookmarked(video.id)) {
+                            videoItem.remove();
+                            
+                            const remainingBookmarks = bookmarkedVideos.length - 1;
+                            document.getElementById('bookmarkCount').textContent = remainingBookmarks;
+                            
+                            if (remainingBookmarks === 0) {
+                                loadBookmarkedVideos();
+                            }
+                        }
+                    }, 300);
+                });
+                
+                videosList.appendChild(videoItem);
+            });
+        }
+
+        function setupSearch() {
+            const searchInput = document.getElementById('searchInput');
+            
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const activeSection = document.querySelector('.menu-item.active').dataset.section;
+                
+                if (searchTerm.length > 0) {
+                    if (activeSection === 'bookmarks') {
+                        const bookmarks = bookmarkManager.getBookmarks();
+                        
+                        let allVideos = [];
+                        for (const categoryId in playlistsData) {
+                            const category = playlistsData[categoryId];
+                            for (const playlist of category.playlists) {
+                                const videosWithPlaylistInfo = playlist.videos.map(video => ({
+                                    ...video,
+                                    playlistTitle: playlist.title,
+                                    playlistId: playlist.id,
+                                    categoryId: categoryId
+                                }));
+                                allVideos = allVideos.concat(videosWithPlaylistInfo);
+                            }
+                        }
+                        
+                        const filteredVideos = allVideos.filter(video => 
+                            bookmarks.includes(video.id) && (
+                                video.title.toLowerCase().includes(searchTerm) ||
+                                video.description.toLowerCase().includes(searchTerm) ||
+                                video.playlistTitle.toLowerCase().includes(searchTerm)
+                            )
+                        );
+                        
+                        const videosList = document.getElementById('videosList');
+                        
+                        if (filteredVideos.length === 0) {
+                            videosList.innerHTML = `
+                                <div class="no-content">
+                                    <i class="fas fa-search"></i>
+                                    <h3>Tidak ditemukan video</h3>
+                                    <p>Tidak ada video bookmark yang cocok dengan pencarian "${searchTerm}".</p>
+                                </div>
+                            `;
+                        } else {
+                            videosList.innerHTML = '';
+                            
+                            filteredVideos.forEach((video, index) => {
+                                const videoItem = document.createElement('div');
+                                videoItem.className = 'video-item';
+                                videoItem.dataset.id = video.id;
+                                
+                                videoItem.innerHTML = `
+                                    <div class="video-number">${index + 1}</div>
+                                    <div class="video-item-content">
+                                        <div class="video-item-title">${video.title}</div>
+                                        <div class="video-item-meta">
+                                            <span class="video-item-duration"><i class="far fa-clock"></i> ${video.duration}</span>
+                                            <span><i class="fas fa-tag"></i> ${video.playlistTitle}</span>
+                                            <span><i class="far fa-calendar"></i> ${video.date}</span>
+                                        </div>
+                                    </div>
+                                    <button class="bookmark-btn-small bookmarked" data-id="${video.id}">
+                                        <i class="fas fa-bookmark"></i>
+                                    </button>
+                                `;
+                                
+                                videoItem.addEventListener('click', (e) => {
+                                    if (!e.target.closest('.bookmark-btn-small')) {
+                                        openPlaylist(video.categoryId, video.playlistId);
+                                        
+                                        setTimeout(() => {
+                                            playVideo(video);
+                                        }, 100);
+                                    }
+                                });
+                                
+                                const bookmarkBtn = videoItem.querySelector('.bookmark-btn-small');
+                                bookmarkBtn.addEventListener('click', (e) => {
+                                    e.stopPropagation();
+                                    toggleBookmark(video.id, bookmarkBtn);
+                                });
+                                
+                                videosList.appendChild(videoItem);
+                            });
+                        }
+                    } else if (playlistsData[activeSection]) {
+                        const category = playlistsData[activeSection];
+                        
+                        let allVideosInCategory = [];
+                        category.playlists.forEach(playlist => {
+                            const videosWithPlaylistInfo = playlist.videos.map(video => ({
+                                ...video,
+                                playlistTitle: playlist.title,
+                                playlistId: playlist.id
+                            }));
+                            allVideosInCategory = allVideosInCategory.concat(videosWithPlaylistInfo);
+                        });
+                        
+                        const filteredVideos = allVideosInCategory.filter(video => 
+                            video.title.toLowerCase().includes(searchTerm) ||
+                            video.description.toLowerCase().includes(searchTerm)
+                        );
+                        
+                        const videosList = document.getElementById('videosList');
+                        
+                        if (filteredVideos.length === 0) {
+                            videosList.innerHTML = `
+                                <div class="no-content">
+                                    <i class="fas fa-search"></i>
+                                    <h3>Tidak ditemukan video</h3>
+                                    <p>Tidak ada video dalam kategori ini yang cocok dengan pencarian "${searchTerm}".</p>
+                                </div>
+                            `;
+                        } else {
+                            videosList.innerHTML = '';
+                            
+                            filteredVideos.forEach((video, index) => {
+                                const videoItem = document.createElement('div');
+                                videoItem.className = 'video-item';
+                                videoItem.dataset.id = video.id;
+                                
+                                videoItem.innerHTML = `
+                                    <div class="video-number">${index + 1}</div>
+                                    <div class="video-item-content">
+                                        <div class="video-item-title">${video.title}</div>
+                                        <div class="video-item-meta">
+                                            <span class="video-item-duration"><i class="far fa-clock"></i> ${video.duration}</span>
+                                            <span><i class="fas fa-tag"></i> ${video.playlistTitle}</span>
+                                            <span><i class="far fa-calendar"></i> ${video.date}</span>
+                                            <span><i class="fas fa-eye"></i> ${video.views}</span>
+                                        </div>
+                                    </div>
+                                    <button class="bookmark-btn-small ${video.bookmarked ? 'bookmarked' : ''}" data-id="${video.id}">
+                                        <i class="${video.bookmarked ? 'fas' : 'far'} fa-bookmark"></i>
+                                    </button>
+                                `;
+                                
+                                videoItem.addEventListener('click', (e) => {
+                                    if (!e.target.closest('.bookmark-btn-small')) {
+                                        openPlaylist(activeSection, video.playlistId);
+                                        
+                                        setTimeout(() => {
+                                            playVideo(video);
+                                        }, 100);
+                                    }
+                                });
+                                
+                                const bookmarkBtn = videoItem.querySelector('.bookmark-btn-small');
+                                bookmarkBtn.addEventListener('click', (e) => {
+                                    e.stopPropagation();
+                                    toggleBookmark(video.id, bookmarkBtn);
+                                });
+                                
+                                videosList.appendChild(videoItem);
+                            });
+                        }
+                    }
+                } else {
+                    if (activeSection === 'bookmarks') {
+                        loadBookmarkedVideos();
+                    } else if (playlistsData[activeSection] && currentState.activePlaylist) {
+                        const playlist = playlistsData[activeSection].playlists.find(p => p.id === currentState.activePlaylist);
+                        if (playlist) {
+                            loadVideosList(playlist.videos);
+                        }
+                    }
+                }
+            });
+        }
+
+        function setupBackButton() {
+            const backButton = document.getElementById('backToPlaylist');
+            backButton.addEventListener('click', () => {
+                const activeSection = document.querySelector('.menu-item.active').dataset.section;
+                
+                if (playlistsData[activeSection]) {
+                    document.getElementById('categorySection').style.display = 'block';
+                    document.getElementById('videoSection').style.display = 'none';
+                    document.getElementById('videosSection').style.display = 'none';
+                    
+                    currentState.activePlaylist = null;
+                    currentState.activeVideo = null;
+                    
+                    document.getElementById('videoPlaceholder').style.display = 'block';
+                    document.getElementById('videoPlayer').style.display = 'none';
+                    document.getElementById('videoPlayer').src = '';
+                }
+            });
+        }
+
+        function showNotification(message) {
+            const existingNotification = document.querySelector('.notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+            
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.innerHTML = `
+                <div style="position: fixed; top: 20px; right: 20px; background-color: var(--primary); color: white; padding: 15px 20px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); z-index: 2000; animation: fadeIn 0.3s ease;">
+                    <i class="fas fa-check-circle"></i> ${message}
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.remove();
+                }
+            }, 3000);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            setupMobileNavigation();
+            setupSidebarNavigation();
+            setupSearch();
+            setupBackButton();
+            bookmarkManager.updateBookmarkCount();
+            
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach(el => {
+                el.style.opacity = '0';
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                }, 100);
+            });
+            
+            setTimeout(() => {
+                showNotification("Selamat datang di RUANG TI! Pilih kategori untuk mulai belajar.");
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
