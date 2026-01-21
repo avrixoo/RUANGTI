@@ -28,15 +28,7 @@
             background-color: #f5f7ff;
             color: var(--dark);
             min-height: 100vh;
-            padding-bottom: var(--navbar-height); /* Tambah padding untuk navbar bawah */
-        }
-
-        /* HAPUS SEMUA ELEMENT SIDEBAR DAN MOBILE TOGGLE */
-        #sidebar,
-        .mobile-toggle,
-        #sidebar-overlay,
-        .toggle-sidebar {
-            display: none !important;
+            padding-bottom: var(--navbar-height);
         }
 
         /* NAVBAR BAWAH - ICON SAJA */
@@ -90,13 +82,11 @@
             text-align: center;
         }
 
-        /* Untuk icon yang lebih besar */
         .nav-icon i.fa-home,
         .nav-icon i.fa-bookmark {
             font-size: 1.5rem;
         }
 
-        /* BOOKMARK COUNTER DI NAVBAR */
         .nav-badge {
             position: absolute;
             top: 10px;
@@ -134,7 +124,6 @@
         .page-title h1 {
             font-size: 1.8rem;
             color: var(--secondary);
-            
         }
 
         .page-title p {
@@ -163,8 +152,6 @@
             outline: none;
             min-width: 200px;
         }
-
-        
 
         /* WELCOME SECTION */
         .welcome-section {
@@ -249,14 +236,14 @@
             font-size: 1rem;
         }
 
-        .playlists-grid {
+        .courses-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 25px;
             margin-top: 20px;
         }
 
-        .playlist-card {
+        .course-card {
             background-color: white;
             border-radius: 12px;
             overflow: hidden;
@@ -264,32 +251,33 @@
             transition: var(--transition);
             border: 1px solid #eee;
             cursor: pointer;
+            position: relative;
         }
 
-        .playlist-card:hover {
+        .course-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
 
-        .playlist-thumbnail {
+        .course-thumbnail {
             height: 180px;
             background-color: #eaeaea;
             position: relative;
             overflow: hidden;
         }
 
-        .playlist-thumbnail img {
+        .course-thumbnail img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: var(--transition);
         }
 
-        .playlist-card:hover .playlist-thumbnail img {
+        .course-card:hover .course-thumbnail img {
             transform: scale(1.05);
         }
 
-        .playlist-video-count {
+        .course-module-count {
             position: absolute;
             bottom: 10px;
             right: 10px;
@@ -298,13 +286,16 @@
             padding: 5px 10px;
             border-radius: 4px;
             font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
-        .playlist-content {
+        .course-content {
             padding: 20px;
         }
 
-        .playlist-title {
+        .course-title {
             font-size: 1.2rem;
             font-weight: 600;
             margin-bottom: 10px;
@@ -312,14 +303,122 @@
             line-height: 1.4;
         }
 
-        .playlist-description {
+        .course-description {
             color: var(--gray);
             font-size: 0.9rem;
             line-height: 1.5;
             margin-bottom: 15px;
         }
 
-        .playlist-meta {
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+
+        /* MODULES SECTION (Subfolders) */
+        .modules-section {
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            display: none;
+        }
+
+        .modules-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .modules-header h2 {
+            font-size: 1.8rem;
+            color: var(--secondary);
+        }
+
+        .modules-header p {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+
+        .back-to-courses {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .back-to-courses:hover {
+            background-color: var(--secondary);
+        }
+
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .module-card {
+            background-color: #f9f9f9;
+            border-radius: 12px;
+            padding: 25px;
+            border-left: 5px solid var(--accent);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .module-card:hover {
+            background-color: #f0f0f0;
+            transform: translateY(-3px);
+        }
+
+        .module-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .module-number {
+            width: 35px;
+            height: 35px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .module-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .module-description {
+            color: var(--gray);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .module-meta {
             display: flex;
             justify-content: space-between;
             color: var(--gray);
@@ -348,7 +447,7 @@
             color: var(--secondary);
         }
 
-        .back-to-playlist {
+        .back-to-modules {
             display: flex;
             align-items: center;
             gap: 8px;
@@ -362,7 +461,7 @@
             font-size: 0.9rem;
         }
 
-        .back-to-playlist:hover {
+        .back-to-modules:hover {
             background-color: var(--secondary);
         }
 
@@ -512,22 +611,6 @@
             color: #ffd700;
         }
 
-        /* BOOKMARK COUNTER */
-        .bookmark-counter {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background-color: #ff4757;
-            color: white;
-            font-size: 0.7rem;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
         /* NO CONTENT MESSAGE */
         .no-content {
             grid-column: 1 / -1;
@@ -554,7 +637,8 @@
 
         /* RESPONSIVE DESIGN */
         @media (max-width: 1024px) {
-            .playlists-grid {
+            .courses-grid,
+            .modules-grid {
                 grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             }
             
@@ -600,7 +684,8 @@
                 height: 300px;
             }
             
-            .playlists-grid {
+            .courses-grid,
+            .modules-grid {
                 grid-template-columns: 1fr;
             }
             
@@ -702,9 +787,6 @@
                     <i class="fas fa-search"></i>
                     <input type="text" id="searchInput" placeholder="Cari video...">
                 </div>
-                
-                    
-                </div>
             </div>
         </div>
         
@@ -738,17 +820,34 @@
             </div>
         </section>
         
-        <!-- CATEGORY SECTION (PLAYLISTS) -->
+        <!-- CATEGORY SECTION (COURSES) -->
         <section class="category-section" id="categorySection">
             <div class="category-header">
                 <div>
                     <h2 id="categoryTitle">Kategori</h2>
-                    <p id="categorySubtitle">Pilih playlist untuk mulai belajar</p>
+                    <p id="categorySubtitle">Pilih kursus untuk mulai belajar</p>
                 </div>
             </div>
             
-            <div class="playlists-grid" id="playlistsGrid">
-                <!-- Playlists akan dimuat melalui JavaScript -->
+            <div class="courses-grid" id="coursesGrid">
+                <!-- Courses akan dimuat melalui JavaScript -->
+            </div>
+        </section>
+        
+        <!-- MODULES SECTION (Subfolders) -->
+        <section class="modules-section" id="modulesSection">
+            <div class="modules-header">
+                <div>
+                    <h2 id="modulesTitle">Modul Pembelajaran</h2>
+                    <p id="modulesSubtitle">Pilih modul untuk melihat daftar video</p>
+                </div>
+                <button class="back-to-courses" id="backToCourses">
+                    <i class="fas fa-arrow-left"></i> Kembali ke Kursus
+                </button>
+            </div>
+            
+            <div class="modules-grid" id="modulesGrid">
+                <!-- Modules akan dimuat melalui JavaScript -->
             </div>
         </section>
         
@@ -757,10 +856,10 @@
             <div class="video-section-header">
                 <div>
                     <h2 id="videoSectionTitle">Pemutar Video</h2>
-                    <p id="currentPlaylistTitle" style="color: var(--gray); font-size: 0.9rem; margin-top: 5px;"></p>
+                    <p id="currentModuleTitle" style="color: var(--gray); font-size: 0.9rem; margin-top: 5px;"></p>
                 </div>
-                <button class="back-to-playlist" id="backToPlaylist">
-                    <i class="fas fa-arrow-left"></i> Kembali
+                <button class="back-to-modules" id="backToModules">
+                    <i class="fas fa-arrow-left"></i> Kembali ke Modul
                 </button>
             </div>
             
@@ -837,48 +936,62 @@
     </nav>
     
     <script>
-        // Data playlist dan video
-        const playlistsData = {
+        // Data dengan struktur baru: kategori -> kursus -> modul -> video
+        const coursesData = {
             "negotiation": {
                 title: "Negotiation",
                 description: "Pelajari teknik negosiasi efektif untuk berbagai situasi industri",
-                playlists: [
+                courses: [
                     {
                         id: "negotiation-1",
                         title: "Teknik Negosiasi Efektif dalam Industri",
                         description: "Pelajari teknik negosiasi efektif yang dapat diterapkan dalam berbagai situasi industri.",
                         thumbnail: "https://img-c.udemycdn.com/course/750x422/701188_a1b1_3.jpg",
                         instructor: "Dr. Ahmad Kurniawan",
-                        videos: [
+                        modules: [
                             {
-                                id: 101,
-                                title: "Pengenalan Negosiasi dalam Industri",
-                                description: "Pengenalan konsep dasar negosiasi dan penerapannya dalam konteks industri.",
-                                duration: "15:30",
-                                date: "10 Jan 2024",
-                                views: "1.2k",
-                                driveId: "1YgYMgc3E6jqB9e9qQZQ7TQ9XqZQ7TQ9X",
-                                bookmarked: false
+                                id: "module-1",
+                                title: "Dasar-dasar Negosiasi",
+                                description: "Memahami konsep dasar dan prinsip-prinsip negosiasi",
+                                videos: [
+                                    {
+                                        id: 101,
+                                        title: "Pengenalan Negosiasi dalam Industri",
+                                        description: "Pengenalan konsep dasar negosiasi dan penerapannya dalam konteks industri.",
+                                        duration: "15:30",
+                                        date: "10 Jan 2024",
+                                        views: "1.2k",
+                                        driveId: "1YgYMgc3E6jqB9e9qQZQ7TQ9XqZQ7TQ9X",
+                                        bookmarked: false
+                                    },
+                                    {
+                                        id: 102,
+                                        title: "Persiapan dan Perencanaan Negosiasi",
+                                        description: "Langkah-langkah persiapan dan perencanaan yang efektif sebelum memasuki proses negosiasi.",
+                                        duration: "22:15",
+                                        date: "12 Jan 2024",
+                                        views: "950",
+                                        driveId: "1YgYMgc3E6jqB9e9qQZQ7TQ9XqZQ7TQ9Y",
+                                        bookmarked: false
+                                    }
+                                ]
                             },
                             {
-                                id: 102,
-                                title: "Persiapan dan Perencanaan Negosiasi",
-                                description: "Langkah-langkah persiapan dan perencanaan yang efektif sebelum memasuki proses negosiasi.",
-                                duration: "22:15",
-                                date: "12 Jan 2024",
-                                views: "950",
-                                driveId: "1YgYMgc3E6jqB9e9qQZQ7TQ9XqZQ7TQ9Y",
-                                bookmarked: false
-                            },
-                            {
-                                id: 10456,
-                                title: "Persiapan dan Perencanaan Negosiasi",
-                                description: "Langkah-langkah persiapan dan perencanaan yang efektif sebelum memasuki proses negosiasi.",
-                                duration: "22:15",
-                                date: "12 Jan 2024",
-                                views: "950",
-                                driveId: "1YgYMgc3E6jqB9e9qQZQ7TQ9XqZQ7TQ9Y",
-                                bookmarked: false
+                                id: "module-2",
+                                title: "Strategi Negosiasi Lanjutan",
+                                description: "Menguasai teknik dan strategi negosiasi tingkat lanjut",
+                                videos: [
+                                    {
+                                        id: 103,
+                                        title: "Teknik BATNA dan ZOPA",
+                                        description: "Memahami dan menerapkan BATNA (Best Alternative To a Negotiated Agreement) dan ZOPA (Zone Of Possible Agreement).",
+                                        duration: "18:45",
+                                        date: "15 Jan 2024",
+                                        views: "1.1k",
+                                        driveId: "1YgYMgc3E6jqB9e9qQZQ7TQ9XqZQ7TQ9Z",
+                                        bookmarked: false
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -888,16 +1001,23 @@
                         description: "Mengembangkan strategi negosiasi yang menghasilkan solusi menguntungkan semua pihak.",
                         thumbnail: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
                         instructor: "Eva Marlina, M.T.",
-                        videos: [
+                        modules: [
                             {
-                                id: 103,
-                                title: "Konsep Dasar Win-Win Solution",
-                                description: "Memahami filosofi dan prinsip dasar win-win solution dalam negosiasi.",
-                                duration: "16:45",
-                                date: "5 Feb 2024",
-                                views: "1.3k",
-                                driveId: "1YgYMgc3E6jqB9e9qQZQ7TQ9XqZQ7TQ9C",
-                                bookmarked: false
+                                id: "module-1",
+                                title: "Konsep Win-Win Solution",
+                                description: "Memahami filosofi dan prinsip dasar win-win solution",
+                                videos: [
+                                    {
+                                        id: 104,
+                                        title: "Konsep Dasar Win-Win Solution",
+                                        description: "Memahami filosofi dan prinsip dasar win-win solution dalam negosiasi.",
+                                        duration: "16:45",
+                                        date: "5 Feb 2024",
+                                        views: "1.3k",
+                                        driveId: "1YgYMgc3E6jqB9e9qQZQ7TQ9XqZQ7TQ9C",
+                                        bookmarked: false
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -906,23 +1026,57 @@
             "data-science": {
                 title: "Data Science",
                 description: "Penguasaan analisis data untuk pengambilan keputusan industri",
-                playlists: [
+                courses: [
                     {
                         id: "data-science-1",
                         title: "Analisis Data dengan Python untuk Teknik Industri",
                         description: "Pengenalan analisis data menggunakan Python dengan fokus pada aplikasi dalam teknik industri.",
                         thumbnail: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
                         instructor: "Prof. Budi Santoso",
-                        videos: [
+                        modules: [
                             {
-                                id: 201,
-                                title: "Pengenalan Python untuk Analisis Data",
-                                description: "Dasar-dasar Python dan library untuk analisis data industri.",
-                                duration: "20:15",
-                                date: "5 Mar 2024",
-                                views: "2.1k",
-                                driveId: "1YgYMgc3E6jqB9e9qQZQ7TQ9XqZQ7TQ9H",
-                                bookmarked: false
+                                id: "module-1",
+                                title: "Pengenalan Python untuk Data Science",
+                                description: "Dasar-dasar Python untuk analisis data industri",
+                                videos: [
+                                    {
+                                        id: 201,
+                                        title: "Pengenalan Python untuk Analisis Data",
+                                        description: "Dasar-dasar Python dan library untuk analisis data industri.",
+                                        duration: "20:15",
+                                        date: "5 Mar 2024",
+                                        views: "2.1k",
+                                        driveId: "1YgYMgc3E6jqB9e9qQZQ7TQ9XqZQ7TQ9H",
+                                        bookmarked: false
+                                    },
+                                    {
+                                        id: 202,
+                                        title: "Instalasi dan Setup Environment",
+                                        description: "Panduan instalasi Python, Jupyter Notebook, dan library penting untuk data science.",
+                                        duration: "12:30",
+                                        date: "7 Mar 2024",
+                                        views: "1.8k",
+                                        driveId: "1YgYMgc3E6jqB9e9qQZQ7TQ9XqZQ7TQ9I",
+                                        bookmarked: false
+                                    }
+                                ]
+                            },
+                            {
+                                id: "module-2",
+                                title: "Data Manipulation dengan Pandas",
+                                description: "Mengolah dan memanipulasi data menggunakan library Pandas",
+                                videos: [
+                                    {
+                                        id: 203,
+                                        title: "Dasar-dasar Pandas",
+                                        description: "Pengenalan library Pandas untuk manipulasi data.",
+                                        duration: "25:20",
+                                        date: "10 Mar 2024",
+                                        views: "1.9k",
+                                        driveId: "1YgYMgc3E6jqB9e9qQZQ7TQ9XqZQ7TQ9J",
+                                        bookmarked: false
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -931,23 +1085,74 @@
             "supply-chain": {
                 title: "Supply Chain Management",
                 description: "Pengelolaan rantai pasok untuk efisiensi operasional",
-                playlists: [
+                courses: [
                     {
                         id: "supply-chain-1",
-                        title: "Supply Chain Management-Beginners to Advanced Professionals",
+                        title: "Supply Chain Management - Beginners to Advanced",
                         description: "Konsep dan implementasi manajemen rantai pasok modern dalam industri.",
                         thumbnail: "https://img-c.udemycdn.com/course/750x422/6539159_690e_2.jpg",
                         instructor: "Null",
-                        videos: [
+                        modules: [
                             {
-                                id: 301,
-                                title: "Konsep Dasar Supply Chain Management",
-                                description: "Pengenalan konsep dan komponen utama supply chain management.",
-                                duration: "17:25",
-                                date: "10 May 2024",
-                                views: "2.2k",
-                                driveId: "1YgYMgc3E6jqB9e9qQZQ7TQ9XqZQ7TQ9R",
-                                bookmarked: false
+                                id: "module-1",
+                                title: "Introduction to Supply Chain Management",
+                                description: "Pengenalan dasar tentang manajemen rantai pasok",
+                                videos: [
+                                    {
+                                        id: 301,
+                                        title: "Konsep Dasar Supply Chain Management",
+                                        description: "Pengenalan konsep dan komponen utama supply chain management.",
+                                        duration: "17:25",
+                                        date: "10 May 2024",
+                                        views: "2.2k",
+                                        driveId: "1YgYMgc3E6jqB9e9qQZQ7TQ9XqZQ7TQ9R",
+                                        bookmarked: false
+                                    },
+                                    {
+                                        id: 302,
+                                        title: "Sejarah dan Evolusi SCM",
+                                        description: "Perkembangan sejarah dan evolusi supply chain management.",
+                                        duration: "14:40",
+                                        date: "12 May 2024",
+                                        views: "1.7k",
+                                        driveId: "1YgYMgc3E6jqB9e9qQZQ7TQ9XqZQ7TQ9S",
+                                        bookmarked: false
+                                    }
+                                ]
+                            },
+                            {
+                                id: "module-2",
+                                title: "Supply Chain Strategy",
+                                description: "Strategi dan perencanaan rantai pasok",
+                                videos: [
+                                    {
+                                        id: 303,
+                                        title: "Strategi Rantai Pasok",
+                                        description: "Berbagai strategi dalam mengelola rantai pasok.",
+                                        duration: "19:15",
+                                        date: "15 May 2024",
+                                        views: "1.5k",
+                                        driveId: "1YgYMgc3E6jqB9e9qQZQ7TQ9XqZQ7TQ9T",
+                                        bookmarked: false
+                                    }
+                                ]
+                            },
+                            {
+                                id: "module-3",
+                                title: "Logistics and Distribution",
+                                description: "Manajemen logistik dan distribusi dalam SCM",
+                                videos: [
+                                    {
+                                        id: 304,
+                                        title: "Dasar-dasar Logistik",
+                                        description: "Konsep dasar manajemen logistik dalam supply chain.",
+                                        duration: "16:30",
+                                        date: "18 May 2024",
+                                        views: "1.4k",
+                                        driveId: "1YgYMgc3E6jqB9e9qQZQ7TQ9XqZQ7TQ9U",
+                                        bookmarked: false
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -956,23 +1161,73 @@
             "project-management": {
                 title: "Lainnya",
                 description: "Silahkan pilih kursus lainnya yang anda suka",
-                playlists: [
+                courses: [
                     {
                         id: "project-management-1",
                         title: "Manajemen Proyek Teknik Industri",
                         description: "Panduan lengkap manajemen proyek untuk mahasiswa teknik industri.",
                         thumbnail: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
                         instructor: "Ir. Dedi Pratama",
-                        videos: [
+                        modules: [
                             {
-                                id: 401,
-                                title: "Pengenalan Manajemen Proyek",
-                                description: "Konsep dasar dan framework manajemen proyek teknik industri.",
-                                duration: "16:40",
-                                date: "1 Jun 2024",
-                                views: "2.3k",
-                                driveId: "1YgYMgc3E6jqB9e9qQZQ7TQ9XqZQ7TQ9W",
-                                bookmarked: false
+                                id: "module-1",
+                                title: "Dasar-dasar Manajemen Proyek",
+                                description: "Pengenalan konsep dasar manajemen proyek",
+                                videos: [
+                                    {
+                                        id: 401,
+                                        title: "Pengenalan Manajemen Proyek",
+                                        description: "Konsep dasar dan framework manajemen proyek teknik industri.",
+                                        duration: "16:40",
+                                        date: "1 Jun 2024",
+                                        views: "2.3k",
+                                        driveId: "1YgYMgc3E6jqB9e9qQZQ7TQ9XqZQ7TQ9W",
+                                        bookmarked: false
+                                    }
+                                ]
+                            },
+                            {
+                                id: "module-2",
+                                title: "Project Planning and Scheduling",
+                                description: "Perencanaan dan penjadwalan proyek",
+                                videos: [
+                                    {
+                                        id: 402,
+                                        title: "Teknik Perencanaan Proyek",
+                                        description: "Metode dan teknik dalam perencanaan proyek.",
+                                        duration: "18:20",
+                                        date: "3 Jun 2024",
+                                        views: "1.9k",
+                                        driveId: "1YgYMgc3E6jqB9e9qQZQ7TQ9XqZQ7TQ9X",
+                                        bookmarked: false
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        id: "quality-management-1",
+                        title: "Manajemen Kualitas Total (TQM)",
+                        description: "Implementasi Total Quality Management dalam industri",
+                        thumbnail: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                        instructor: "Dr. Sari Dewi",
+                        modules: [
+                            {
+                                id: "module-1",
+                                title: "Konsep Dasar TQM",
+                                description: "Pengenalan Total Quality Management",
+                                videos: [
+                                    {
+                                        id: 501,
+                                        title: "Pengenalan Manajemen Kualitas Total",
+                                        description: "Konsep dasar dan prinsip-prinsip TQM.",
+                                        duration: "14:50",
+                                        date: "10 Jul 2024",
+                                        views: "1.6k",
+                                        driveId: "1YgYMgc3E6jqB9e9qQZQ7TQ9XqZQ7TQ9Y",
+                                        bookmarked: false
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -1035,7 +1290,8 @@
         // State aplikasi
         let currentState = {
             activeCategory: null,
-            activePlaylist: null,
+            activeCourse: null,
+            activeModule: null,
             activeVideo: null
         };
 
@@ -1058,6 +1314,7 @@
                     // Sembunyikan semua bagian konten
                     document.getElementById('welcomeSection').style.display = 'none';
                     document.getElementById('categorySection').style.display = 'none';
+                    document.getElementById('modulesSection').style.display = 'none';
                     document.getElementById('videoSection').style.display = 'none';
                     document.getElementById('videosSection').style.display = 'none';
                     document.getElementById('searchBox').style.display = 'none';
@@ -1065,7 +1322,8 @@
                     // Reset state
                     currentState = {
                         activeCategory: null,
-                        activePlaylist: null,
+                        activeCourse: null,
+                        activeModule: null,
                         activeVideo: null
                     };
                     
@@ -1096,51 +1354,60 @@
                         
                         loadBookmarkedVideos();
                     }
-                    else if (playlistsData[section]) {
-                        const category = playlistsData[section];
+                    else if (coursesData[section]) {
+                        const category = coursesData[section];
                         pageTitle.textContent = category.title;
                         pageSubtitle.textContent = category.description;
                         document.getElementById('categorySection').style.display = 'block';
                         
-                        loadPlaylists(section);
+                        loadCourses(section);
                     }
                 });
             });
         }
 
-        // Load playlists
-        function loadPlaylists(categoryId) {
-            const category = playlistsData[categoryId];
+        // Load courses
+        function loadCourses(categoryId) {
+            const category = coursesData[categoryId];
             if (!category) return;
             
-            const playlistsGrid = document.getElementById('playlistsGrid');
-            playlistsGrid.innerHTML = '';
+            const coursesGrid = document.getElementById('coursesGrid');
+            coursesGrid.innerHTML = '';
             
-            category.playlists.forEach(playlist => {
-                const playlistCard = document.createElement('div');
-                playlistCard.className = 'playlist-card';
-                playlistCard.dataset.id = playlist.id;
+            category.courses.forEach(course => {
+                // Hitung total modul dan video
+                let totalModules = course.modules.length;
+                let totalVideos = 0;
+                course.modules.forEach(module => {
+                    totalVideos += module.videos.length;
+                });
                 
-                playlistCard.innerHTML = `
-                    <div class="playlist-thumbnail">
-                        <img src="${playlist.thumbnail}" alt="${playlist.title}">
-                        <div class="playlist-video-count">${playlist.videos.length} video</div>
+                const courseCard = document.createElement('div');
+                courseCard.className = 'course-card';
+                courseCard.dataset.id = course.id;
+                
+                courseCard.innerHTML = `
+                    <div class="course-thumbnail">
+                        <img src="${course.thumbnail}" alt="${course.title}">
+                        <div class="course-module-count">
+                            <i class="fas fa-folder"></i> ${totalModules} modul • ${totalVideos} video
+                        </div>
                     </div>
-                    <div class="playlist-content">
-                        <h3 class="playlist-title">${playlist.title}</h3>
-                        <p class="playlist-description">${playlist.description}</p>
-                        <div class="playlist-meta">
-                            <span><i class="fas fa-user"></i> ${playlist.instructor}</span>
-                            <span><i class="fas fa-clock"></i> ${calculateTotalDuration(playlist.videos)}</span>
+                    <div class="course-content">
+                        <h3 class="course-title">${course.title}</h3>
+                        <p class="course-description">${course.description}</p>
+                        <div class="course-meta">
+                            <span><i class="fas fa-user"></i> ${course.instructor}</span>
+                            <span><i class="fas fa-clock"></i> ${calculateTotalDuration(course)}</span>
                         </div>
                     </div>
                 `;
                 
-                playlistCard.addEventListener('click', () => {
-                    openPlaylist(categoryId, playlist.id);
+                courseCard.addEventListener('click', () => {
+                    openCourse(categoryId, course.id);
                 });
                 
-                playlistsGrid.appendChild(playlistCard);
+                coursesGrid.appendChild(courseCard);
             });
             
             document.getElementById('categoryTitle').textContent = category.title;
@@ -1148,12 +1415,14 @@
             document.getElementById('categorySection').style.display = 'block';
         }
 
-        function calculateTotalDuration(videos) {
+        function calculateTotalDuration(course) {
             let totalSeconds = 0;
             
-            videos.forEach(video => {
-                const [minutes, seconds] = video.duration.split(':').map(Number);
-                totalSeconds += minutes * 60 + seconds;
+            course.modules.forEach(module => {
+                module.videos.forEach(video => {
+                    const [minutes, seconds] = video.duration.split(':').map(Number);
+                    totalSeconds += minutes * 60 + seconds;
+                });
             });
             
             const hours = Math.floor(totalSeconds / 3600);
@@ -1166,30 +1435,85 @@
             }
         }
 
-        function openPlaylist(categoryId, playlistId) {
-            const category = playlistsData[categoryId];
+        function openCourse(categoryId, courseId) {
+            const category = coursesData[categoryId];
             if (!category) return;
             
-            const playlist = category.playlists.find(p => p.id === playlistId);
-            if (!playlist) return;
+            const course = category.courses.find(c => c.id === courseId);
+            if (!course) return;
             
             currentState.activeCategory = categoryId;
-            currentState.activePlaylist = playlistId;
+            currentState.activeCourse = courseId;
             
             document.getElementById('categorySection').style.display = 'none';
+            document.getElementById('modulesSection').style.display = 'block';
+            
+            document.getElementById('modulesTitle').textContent = course.title;
+            document.getElementById('modulesSubtitle').textContent = `Pilih modul untuk mulai belajar (${course.modules.length} modul)`;
+            
+            loadModules(course.modules);
+        }
+
+        function loadModules(modules) {
+            const modulesGrid = document.getElementById('modulesGrid');
+            modulesGrid.innerHTML = '';
+            
+            modules.forEach((module, index) => {
+                const moduleCard = document.createElement('div');
+                moduleCard.className = 'module-card';
+                moduleCard.dataset.id = module.id;
+                
+                moduleCard.innerHTML = `
+                    <div class="module-header">
+                        <div class="module-number">${index + 1}</div>
+                        <div>
+                            <div class="module-title">${module.title}</div>
+                            <p class="module-description">${module.description}</p>
+                        </div>
+                    </div>
+                    <div class="module-meta">
+                        <span><i class="fas fa-video"></i> ${module.videos.length} video</span>
+                        <span><i class="fas fa-clock"></i> ${calculateModuleDuration(module)}</span>
+                    </div>
+                `;
+                
+                moduleCard.addEventListener('click', () => {
+                    openModule(module);
+                });
+                
+                modulesGrid.appendChild(moduleCard);
+            });
+        }
+
+        function calculateModuleDuration(module) {
+            let totalSeconds = 0;
+            
+            module.videos.forEach(video => {
+                const [minutes, seconds] = video.duration.split(':').map(Number);
+                totalSeconds += minutes * 60 + seconds;
+            });
+            
+            const minutes = Math.floor(totalSeconds / 60);
+            return `${minutes} menit`;
+        }
+
+        function openModule(module) {
+            currentState.activeModule = module.id;
+            
+            document.getElementById('modulesSection').style.display = 'none';
             document.getElementById('videoSection').style.display = 'block';
             document.getElementById('videosSection').style.display = 'block';
             document.getElementById('searchBox').style.display = 'flex';
             
-            document.getElementById('videoSectionTitle').textContent = playlist.title;
-            document.getElementById('currentPlaylistTitle').textContent = `Playlist: ${playlist.title}`;
-            document.getElementById('videosListTitle').textContent = playlist.title;
-            document.getElementById('videosListSubtitle').textContent = `Pilih video untuk mulai belajar (${playlist.videos.length} video)`;
+            document.getElementById('videoSectionTitle').textContent = module.title;
+            document.getElementById('currentModuleTitle').textContent = `Modul: ${module.title}`;
+            document.getElementById('videosListTitle').textContent = module.title;
+            document.getElementById('videosListSubtitle').textContent = `Pilih video untuk mulai belajar (${module.videos.length} video)`;
             
-            loadVideosList(playlist.videos);
+            loadVideosList(module.videos);
             
-            if (playlist.videos.length > 0) {
-                playVideo(playlist.videos[0]);
+            if (module.videos.length > 0) {
+                playVideo(module.videos[0]);
                 
                 const firstVideoItem = document.querySelector('.video-item');
                 if (firstVideoItem) {
@@ -1302,16 +1626,19 @@
             const videosList = document.getElementById('videosList');
             
             let allVideos = [];
-            for (const categoryId in playlistsData) {
-                const category = playlistsData[categoryId];
-                for (const playlist of category.playlists) {
-                    const videosWithPlaylistInfo = playlist.videos.map(video => ({
-                        ...video,
-                        playlistTitle: playlist.title,
-                        playlistId: playlist.id,
-                        categoryId: categoryId
-                    }));
-                    allVideos = allVideos.concat(videosWithPlaylistInfo);
+            for (const categoryId in coursesData) {
+                const category = coursesData[categoryId];
+                for (const course of category.courses) {
+                    for (const module of course.modules) {
+                        const videosWithInfo = module.videos.map(video => ({
+                            ...video,
+                            moduleTitle: module.title,
+                            courseTitle: course.title,
+                            courseId: course.id,
+                            categoryId: categoryId
+                        }));
+                        allVideos = allVideos.concat(videosWithInfo);
+                    }
                 }
             }
             
@@ -1343,8 +1670,8 @@
                         <div class="video-item-title">${video.title}</div>
                         <div class="video-item-meta">
                             <span class="video-item-duration"><i class="far fa-clock"></i> ${video.duration}</span>
-                            <span><i class="fas fa-tag"></i> ${video.playlistTitle}</span>
-                            <span><i class="far fa-calendar"></i> ${video.date}</span>
+                            <span><i class="fas fa-folder"></i> ${video.courseTitle}</span>
+                            <span><i class="fas fa-tag"></i> ${video.moduleTitle}</span>
                         </div>
                     </div>
                     <button class="bookmark-btn-small bookmarked" data-id="${video.id}">
@@ -1354,15 +1681,25 @@
                 
                 videoItem.addEventListener('click', (e) => {
                     if (!e.target.closest('.bookmark-btn-small')) {
-                        openPlaylist(video.categoryId, video.playlistId);
+                        openCourse(video.categoryId, video.courseId);
                         
                         setTimeout(() => {
-                            playVideo(video);
+                            const category = coursesData[video.categoryId];
+                            const course = category.courses.find(c => c.id === video.courseId);
+                            const module = course.modules.find(m => m.videos.some(v => v.id === video.id));
                             
-                            document.querySelectorAll('.video-item').forEach(item => {
-                                item.classList.remove('active');
-                            });
-                            videoItem.classList.add('active');
+                            if (module) {
+                                openModule(module);
+                                
+                                setTimeout(() => {
+                                    playVideo(video);
+                                    
+                                    document.querySelectorAll('.video-item').forEach(item => {
+                                        item.classList.remove('active');
+                                    });
+                                    videoItem.classList.add('active');
+                                }, 100);
+                            }
                         }, 100);
                     }
                 });
@@ -1403,16 +1740,19 @@
                         const bookmarks = bookmarkManager.getBookmarks();
                         
                         let allVideos = [];
-                        for (const categoryId in playlistsData) {
-                            const category = playlistsData[categoryId];
-                            for (const playlist of category.playlists) {
-                                const videosWithPlaylistInfo = playlist.videos.map(video => ({
-                                    ...video,
-                                    playlistTitle: playlist.title,
-                                    playlistId: playlist.id,
-                                    categoryId: categoryId
-                                }));
-                                allVideos = allVideos.concat(videosWithPlaylistInfo);
+                        for (const categoryId in coursesData) {
+                            const category = coursesData[categoryId];
+                            for (const course of category.courses) {
+                                for (const module of course.modules) {
+                                    const videosWithInfo = module.videos.map(video => ({
+                                        ...video,
+                                        moduleTitle: module.title,
+                                        courseTitle: course.title,
+                                        courseId: course.id,
+                                        categoryId: categoryId
+                                    }));
+                                    allVideos = allVideos.concat(videosWithInfo);
+                                }
                             }
                         }
                         
@@ -1420,7 +1760,8 @@
                             bookmarks.includes(video.id) && (
                                 video.title.toLowerCase().includes(searchTerm) ||
                                 video.description.toLowerCase().includes(searchTerm) ||
-                                video.playlistTitle.toLowerCase().includes(searchTerm)
+                                video.courseTitle.toLowerCase().includes(searchTerm) ||
+                                video.moduleTitle.toLowerCase().includes(searchTerm)
                             )
                         );
                         
@@ -1448,8 +1789,8 @@
                                         <div class="video-item-title">${video.title}</div>
                                         <div class="video-item-meta">
                                             <span class="video-item-duration"><i class="far fa-clock"></i> ${video.duration}</span>
-                                            <span><i class="fas fa-tag"></i> ${video.playlistTitle}</span>
-                                            <span><i class="far fa-calendar"></i> ${video.date}</span>
+                                            <span><i class="fas fa-folder"></i> ${video.courseTitle}</span>
+                                            <span><i class="fas fa-tag"></i> ${video.moduleTitle}</span>
                                         </div>
                                     </div>
                                     <button class="bookmark-btn-small bookmarked" data-id="${video.id}">
@@ -1459,10 +1800,20 @@
                                 
                                 videoItem.addEventListener('click', (e) => {
                                     if (!e.target.closest('.bookmark-btn-small')) {
-                                        openPlaylist(video.categoryId, video.playlistId);
+                                        openCourse(video.categoryId, video.courseId);
                                         
                                         setTimeout(() => {
-                                            playVideo(video);
+                                            const category = coursesData[video.categoryId];
+                                            const course = category.courses.find(c => c.id === video.courseId);
+                                            const module = course.modules.find(m => m.videos.some(v => v.id === video.id));
+                                            
+                                            if (module) {
+                                                openModule(module);
+                                                
+                                                setTimeout(() => {
+                                                    playVideo(video);
+                                                }, 100);
+                                            }
                                         }, 100);
                                     }
                                 });
@@ -1476,109 +1827,123 @@
                                 videosList.appendChild(videoItem);
                             });
                         }
-                    } else if (playlistsData[activeSection]) {
-                        const category = playlistsData[activeSection];
+                    } else if (coursesData[activeSection] && currentState.activeCourse) {
+                        const category = coursesData[activeSection];
+                        const course = category.courses.find(c => c.id === currentState.activeCourse);
                         
-                        let allVideosInCategory = [];
-                        category.playlists.forEach(playlist => {
-                            const videosWithPlaylistInfo = playlist.videos.map(video => ({
-                                ...video,
-                                playlistTitle: playlist.title,
-                                playlistId: playlist.id
-                            }));
-                            allVideosInCategory = allVideosInCategory.concat(videosWithPlaylistInfo);
-                        });
-                        
-                        const filteredVideos = allVideosInCategory.filter(video => 
-                            video.title.toLowerCase().includes(searchTerm) ||
-                            video.description.toLowerCase().includes(searchTerm)
-                        );
-                        
-                        const videosList = document.getElementById('videosList');
-                        
-                        if (filteredVideos.length === 0) {
-                            videosList.innerHTML = `
-                                <div class="no-content">
-                                    <i class="fas fa-search"></i>
-                                    <h3>Tidak ditemukan video</h3>
-                                    <p>Tidak ada video dalam kategori ini yang cocok dengan pencarian "${searchTerm}".</p>
-                                </div>
-                            `;
-                        } else {
-                            videosList.innerHTML = '';
-                            
-                            filteredVideos.forEach((video, index) => {
-                                const videoItem = document.createElement('div');
-                                videoItem.className = 'video-item';
-                                videoItem.dataset.id = video.id;
-                                
-                                videoItem.innerHTML = `
-                                    <div class="video-number">${index + 1}</div>
-                                    <div class="video-item-content">
-                                        <div class="video-item-title">${video.title}</div>
-                                        <div class="video-item-meta">
-                                            <span class="video-item-duration"><i class="far fa-clock"></i> ${video.duration}</span>
-                                            <span><i class="fas fa-tag"></i> ${video.playlistTitle}</span>
-                                            <span><i class="far fa-calendar"></i> ${video.date}</span>
-                                            <span><i class="fas fa-eye"></i> ${video.views}</span>
-                                        </div>
-                                    </div>
-                                    <button class="bookmark-btn-small ${video.bookmarked ? 'bookmarked' : ''}" data-id="${video.id}">
-                                        <i class="${video.bookmarked ? 'fas' : 'far'} fa-bookmark"></i>
-                                    </button>
-                                `;
-                                
-                                videoItem.addEventListener('click', (e) => {
-                                    if (!e.target.closest('.bookmark-btn-small')) {
-                                        openPlaylist(activeSection, video.playlistId);
-                                        
-                                        setTimeout(() => {
-                                            playVideo(video);
-                                        }, 100);
-                                    }
-                                });
-                                
-                                const bookmarkBtn = videoItem.querySelector('.bookmark-btn-small');
-                                bookmarkBtn.addEventListener('click', (e) => {
-                                    e.stopPropagation();
-                                    toggleBookmark(video.id, bookmarkBtn);
-                                });
-                                
-                                videosList.appendChild(videoItem);
+                        if (course) {
+                            let allVideosInCourse = [];
+                            course.modules.forEach(module => {
+                                const videosWithInfo = module.videos.map(video => ({
+                                    ...video,
+                                    moduleTitle: module.title
+                                }));
+                                allVideosInCourse = allVideosInCourse.concat(videosWithInfo);
                             });
+                            
+                            const filteredVideos = allVideosInCourse.filter(video => 
+                                video.title.toLowerCase().includes(searchTerm) ||
+                                video.description.toLowerCase().includes(searchTerm) ||
+                                video.moduleTitle.toLowerCase().includes(searchTerm)
+                            );
+                            
+                            const videosList = document.getElementById('videosList');
+                            
+                            if (filteredVideos.length === 0) {
+                                videosList.innerHTML = `
+                                    <div class="no-content">
+                                        <i class="fas fa-search"></i>
+                                        <h3>Tidak ditemukan video</h3>
+                                        <p>Tidak ada video dalam kursus ini yang cocok dengan pencarian "${searchTerm}".</p>
+                                    </div>
+                                `;
+                            } else {
+                                videosList.innerHTML = '';
+                                
+                                filteredVideos.forEach((video, index) => {
+                                    const videoItem = document.createElement('div');
+                                    videoItem.className = 'video-item';
+                                    videoItem.dataset.id = video.id;
+                                    
+                                    videoItem.innerHTML = `
+                                        <div class="video-number">${index + 1}</div>
+                                        <div class="video-item-content">
+                                            <div class="video-item-title">${video.title}</div>
+                                            <div class="video-item-meta">
+                                                <span class="video-item-duration"><i class="far fa-clock"></i> ${video.duration}</span>
+                                                <span><i class="fas fa-tag"></i> ${video.moduleTitle}</span>
+                                                <span><i class="far fa-calendar"></i> ${video.date}</span>
+                                                <span><i class="fas fa-eye"></i> ${video.views}</span>
+                                            </div>
+                                        </div>
+                                        <button class="bookmark-btn-small ${video.bookmarked ? 'bookmarked' : ''}" data-id="${video.id}">
+                                            <i class="${video.bookmarked ? 'fas' : 'far'} fa-bookmark"></i>
+                                        </button>
+                                    `;
+                                    
+                                    videoItem.addEventListener('click', (e) => {
+                                        if (!e.target.closest('.bookmark-btn-small')) {
+                                            playVideo(video);
+                                            document.querySelectorAll('.video-item').forEach(item => {
+                                                item.classList.remove('active');
+                                            });
+                                            videoItem.classList.add('active');
+                                        }
+                                    });
+                                    
+                                    const bookmarkBtn = videoItem.querySelector('.bookmark-btn-small');
+                                    bookmarkBtn.addEventListener('click', (e) => {
+                                        e.stopPropagation();
+                                        toggleBookmark(video.id, bookmarkBtn);
+                                    });
+                                    
+                                    videosList.appendChild(videoItem);
+                                });
+                            }
                         }
                     }
                 } else {
                     if (activeSection === 'bookmarks') {
                         loadBookmarkedVideos();
-                    } else if (playlistsData[activeSection] && currentState.activePlaylist) {
-                        const playlist = playlistsData[activeSection].playlists.find(p => p.id === currentState.activePlaylist);
-                        if (playlist) {
-                            loadVideosList(playlist.videos);
+                    } else if (coursesData[activeSection] && currentState.activeModule) {
+                        const category = coursesData[activeSection];
+                        const course = category.courses.find(c => c.id === currentState.activeCourse);
+                        if (course) {
+                            const module = course.modules.find(m => m.id === currentState.activeModule);
+                            if (module) {
+                                loadVideosList(module.videos);
+                            }
                         }
                     }
                 }
             });
         }
 
-        function setupBackButton() {
-            const backButton = document.getElementById('backToPlaylist');
-            backButton.addEventListener('click', () => {
-                const activeNavItem = document.querySelector('.nav-icon.active');
-                const activeSection = activeNavItem ? activeNavItem.dataset.section : 'dashboard';
+        function setupBackButtons() {
+            // Back to courses button
+            const backToCoursesBtn = document.getElementById('backToCourses');
+            backToCoursesBtn.addEventListener('click', () => {
+                document.getElementById('modulesSection').style.display = 'none';
+                document.getElementById('categorySection').style.display = 'block';
                 
-                if (playlistsData[activeSection]) {
-                    document.getElementById('categorySection').style.display = 'block';
-                    document.getElementById('videoSection').style.display = 'none';
-                    document.getElementById('videosSection').style.display = 'none';
-                    
-                    currentState.activePlaylist = null;
-                    currentState.activeVideo = null;
-                    
-                    document.getElementById('videoPlaceholder').style.display = 'block';
-                    document.getElementById('videoPlayer').style.display = 'none';
-                    document.getElementById('videoPlayer').src = '';
-                }
+                currentState.activeCourse = null;
+                currentState.activeModule = null;
+                currentState.activeVideo = null;
+            });
+            
+            // Back to modules button
+            const backToModulesBtn = document.getElementById('backToModules');
+            backToModulesBtn.addEventListener('click', () => {
+                document.getElementById('videoSection').style.display = 'none';
+                document.getElementById('videosSection').style.display = 'none';
+                document.getElementById('modulesSection').style.display = 'block';
+                
+                currentState.activeModule = null;
+                currentState.activeVideo = null;
+                
+                document.getElementById('videoPlaceholder').style.display = 'block';
+                document.getElementById('videoPlayer').style.display = 'none';
+                document.getElementById('videoPlayer').src = '';
             });
         }
 
@@ -1609,7 +1974,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             setupNavbarNavigation();
             setupSearch();
-            setupBackButton();
+            setupBackButtons();
             bookmarkManager.updateBookmarkCount();
             
             const fadeElements = document.querySelectorAll('.fade-in');
