@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANJIIIIIIINGGGGGGGG - Platform Pembelajaran TeknikHGIUGUHJGIUG Industri</title>
+    <title>RUANG TI - Platform Pembelajaran Teknik Industri</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -20,7 +20,7 @@
             --light: #f8f9fa;
             --dark: #212529;
             --gray: #6c757d;
-            --sidebar-width: 280px;
+            --navbar-height: 70px;
             --transition: all 0.3s ease;
         }
 
@@ -28,127 +28,98 @@
             background-color: #f5f7ff;
             color: var(--dark);
             min-height: 100vh;
-            padding-left: var(--sidebar-width); /* Tambahkan padding untuk sidebar fixed */
-            transition: var(--transition);
+            padding-bottom: var(--navbar-height); /* Tambah padding untuk navbar bawah */
         }
 
-        /* SIDEBAR - SELALU TETAP DI ATAS */
-        #sidebar {
-            width: var(--sidebar-width);
-            background: linear-gradient(180deg, var(--primary), var(--secondary));
-            color: white;
-            height: 100vh;
+        /* HAPUS SEMUA ELEMENT SIDEBAR DAN MOBILE TOGGLE */
+        #sidebar,
+        .mobile-toggle,
+        #sidebar-overlay,
+        .toggle-sidebar {
+            display: none !important;
+        }
+
+        /* NAVBAR BAWAH - ICON SAJA */
+        #bottom-navbar {
             position: fixed;
+            bottom: 0;
             left: 0;
-            top: 0;
+            right: 0;
+            height: var(--navbar-height);
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
             display: flex;
-            flex-direction: column;
-            box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+            justify-content: space-around;
+            align-items: center;
             z-index: 1000;
-            overflow-y: auto;
-        }
-
-        .sidebar-header {
-            padding: 25px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 10px;
-        }
-
-        .logo {
-            width: 40px;
-            height: 40px;
-            background: white;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary);
-            font-weight: bold;
-            font-size: 1.2rem;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .sidebar-header h2 {
-            font-size: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: white;
-            text-align: center;
-        }
-
-        .sidebar-header p {
-            font-size: 0.85rem;
-            opacity: 0.8;
-            text-align: center;
-        }
-
-        .sidebar-menu {
-            padding: 20px 0;
-            flex-grow: 1;
-        }
-
-        .menu-item {
-            padding: 15px 25px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            cursor: pointer;
-            transition: var(--transition);
-            border-left: 4px solid transparent;
-            text-decoration: none;
-            color: white;
-            position: relative;
-        }
-
-        .menu-item:hover, .menu-item.active {
-            background-color: rgba(255, 255, 255, 0.1);
-            border-left-color: var(--accent);
-        }
-
-        .menu-item i {
-            font-size: 1.2rem;
-            width: 24px;
-            text-align: center;
-        }
-
-        .menu-item span {
-            font-weight: 500;
-            font-size: 1rem;
-        }
-
-        .menu-divider {
-            height: 1px;
-            background-color: rgba(255, 255, 255, 0.1);
-            margin: 15px 25px;
-        }
-
-        .sidebar-footer {
-            padding: 20px;
-            text-align: center;
-            font-size: 0.8rem;
-            opacity: 0.7;
+            box-shadow: 0 -3px 15px rgba(0, 0, 0, 0.1);
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* HAPUS TOMBOL TOGGLE SIDEBAR DARI HEADER */
-        .toggle-sidebar {
-            display: none;
+        .nav-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 70px;
+            height: 100%;
+            color: white;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            position: relative;
+            padding: 10px 0;
+        }
+
+        .nav-icon:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-icon.active {
+            background-color: rgba(255, 255, 255, 0.15);
+            border-top: 3px solid var(--accent);
+        }
+
+        .nav-icon i {
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+        }
+
+        .nav-icon span {
+            font-size: 0.7rem;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        /* Untuk icon yang lebih besar */
+        .nav-icon i.fa-home,
+        .nav-icon i.fa-bookmark {
+            font-size: 1.5rem;
+        }
+
+        /* BOOKMARK COUNTER DI NAVBAR */
+        .nav-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #ff4757;
+            color: white;
+            font-size: 0.6rem;
+            min-width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 4px;
         }
 
         /* MAIN CONTENT */
         #main-content {
             padding: 20px;
-            min-height: 100vh;
+            min-height: calc(100vh - var(--navbar-height));
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
         }
 
         .top-bar {
@@ -415,6 +386,7 @@
             align-items: center;
             justify-content: center;
             position: relative;
+            width: 100%;
         }
 
         .video-placeholder {
@@ -590,57 +562,8 @@
             margin: 0 auto;
         }
 
-        /* RESPONSIVE DESIGN - TABLET & MOBILE */
+        /* RESPONSIVE DESIGN */
         @media (max-width: 1024px) {
-            body {
-                padding-left: 0; /* Hapus padding di mobile/tablet */
-            }
-            
-            #sidebar {
-                transform: translateX(-100%); /* Sembunyikan sidebar di kiri */
-                transition: transform 0.3s ease;
-            }
-            
-            #sidebar.active {
-                transform: translateX(0); /* Tampilkan saat aktif */
-            }
-            
-            /* MOBILE TOGGLE BUTTON */
-            .mobile-toggle {
-                display: flex;
-                position: fixed;
-                top: 20px;
-                left: 20px;
-                z-index: 1001;
-                background-color: var(--primary);
-                color: white;
-                width: 50px;
-                height: 50px;
-                border-radius: 10px;
-                align-items: center;
-                justify-content: center;
-                font-size: 1.5rem;
-                cursor: pointer;
-                box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-                border: none;
-            }
-            
-            /* OVERLAY UNTUK MOBILE */
-            #sidebar-overlay {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.5);
-                z-index: 999;
-                display: none;
-            }
-            
-            #sidebar-overlay.active {
-                display: block;
-            }
-            
             .playlists-grid {
                 grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             }
@@ -648,9 +571,41 @@
             .video-player-container {
                 height: 400px;
             }
+            
+            .welcome-header h2 {
+                font-size: 1.8rem;
+            }
+            
+            .welcome-section {
+                padding: 30px;
+            }
         }
 
         @media (max-width: 768px) {
+            #bottom-navbar {
+                height: 65px;
+            }
+            
+            .nav-icon {
+                width: 60px;
+            }
+            
+            .nav-icon i {
+                font-size: 1.3rem;
+            }
+            
+            .nav-icon span {
+                font-size: 0.65rem;
+            }
+            
+            .nav-badge {
+                top: 8px;
+                right: 8px;
+                font-size: 0.55rem;
+                min-width: 16px;
+                height: 16px;
+            }
+            
             .video-player-container {
                 height: 300px;
             }
@@ -670,7 +625,7 @@
             }
             
             .welcome-header h2 {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
             }
             
             .welcome-card {
@@ -686,6 +641,50 @@
             .video-item-meta {
                 flex-wrap: wrap;
             }
+            
+            #main-content {
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #bottom-navbar {
+                height: 60px;
+            }
+            
+            .nav-icon {
+                width: 55px;
+                padding: 8px 0;
+            }
+            
+            .nav-icon i {
+                font-size: 1.2rem;
+                margin-bottom: 3px;
+            }
+            
+            .nav-icon span {
+                font-size: 0.6rem;
+            }
+            
+            .page-title h1 {
+                font-size: 1.5rem;
+            }
+            
+            .page-title p {
+                font-size: 0.9rem;
+            }
+            
+            .welcome-section {
+                padding: 20px;
+            }
+            
+            .welcome-header h2 {
+                font-size: 1.4rem;
+            }
+            
+            .welcome-card h3 {
+                font-size: 1.2rem;
+            }
         }
 
         /* ANIMATIONS */
@@ -700,69 +699,6 @@
     </style>
 </head>
 <body>
-    <!-- SIDEBAR OVERLAY FOR MOBILE -->
-    <div id="sidebar-overlay"></div>
-    
-    <!-- SIDEBAR NAVIGASI - SELALU TETAP -->
-    <div id="sidebar">
-        <div class="sidebar-header">
-            <div class="logo-container">
-                <div class="logo">
-                    <i class="fas fa-laptop-code"></i>
-                </div>
-                <h2><span>RUANG TI</span></h2>
-            </div>
-            <p>Platform Pembelajaran Teknik Industri</p>
-        </div>
-        
-        <div class="sidebar-menu">
-            <a href="#" class="menu-item active" data-section="dashboard">
-                <i class="fas fa-home"></i>
-                <span>BABIIIIIII</span>
-            </a>
-            
-            <div class="menu-divider"></div>
-            
-            <a href="#" class="menu-item" data-section="negotiation">
-                <i class="fas fa-handshake"></i>
-                <span>Negotiation</span>
-            </a>
-            
-            <a href="#" class="menu-item" data-section="data-science">
-                <i class="fas fa-chart-bar"></i>
-                <span>Data Science</span>
-            </a>
-            
-            <a href="#" class="menu-item" data-section="supply-chain">
-                <i class="fas fa-truck-loading"></i>
-                <span>Supply Chain Management</span>
-            </a>
-            
-            <a href="#" class="menu-item" data-section="project-management">
-                <i class="fas fa-project-diagram"></i>
-                <span>Project Management</span>
-            </a>
-            
-            <div class="menu-divider"></div>
-            
-            <a href="#" class="menu-item" data-section="bookmarks" id="bookmarksMenuItem">
-                <i class="fas fa-bookmark"></i>
-                <span>Bookmarks</span>
-                <span class="bookmark-counter" id="bookmarkCounter" style="display: none;">0</span>
-            </a>
-        </div>
-        
-        <div class="sidebar-footer">
-            <p>&copy; 2026 RUANG TI</p>
-            <p>v2.1.0</p>
-        </div>
-    </div>
-    
-    <!-- MOBILE TOGGLE BUTTON (Hanya muncul di mobile/tablet) -->
-    <button class="mobile-toggle" id="mobileToggle">
-        <i class="fas fa-bars"></i>
-    </button>
-    
     <!-- MAIN CONTENT -->
     <main id="main-content">
         <div class="top-bar">
@@ -841,7 +777,7 @@
             <div class="video-player-container">
                 <div class="video-placeholder" id="videoPlaceholder">
                     <i class="fas fa-play-circle"></i>
-                    <h3>Pilih video dari daftar di samping</h3>
+                    <h3>Pilih video dari daftar di bawah</h3>
                     <p>Video akan dimuat dan diputar langsung dari Google Drive</p>
                 </div>
                 <iframe class="video-player" id="videoPlayer" allow="autoplay; fullscreen" allowfullscreen></iframe>
@@ -854,7 +790,7 @@
                     <span><i class="far fa-calendar"></i> -- --- ----</span>
                     <span><i class="fas fa-eye"></i> --- views</span>
                 </div>
-                <p class="video-description" id="videoDescription">Pilih video dari daftar di samping untuk melihat deskripsi lengkap</p>
+                <p class="video-description" id="videoDescription">Pilih video dari daftar di bawah untuk melihat deskripsi lengkap</p>
             </div>
         </section>
         
@@ -875,6 +811,40 @@
             </div>
         </section>
     </main>
+    
+    <!-- NAVBAR BAWAH - HANYA ICON -->
+    <nav id="bottom-navbar">
+        <a href="#" class="nav-icon active" data-section="dashboard">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        
+        <a href="#" class="nav-icon" data-section="negotiation">
+            <i class="fas fa-handshake"></i>
+            <span>Negotiation</span>
+        </a>
+        
+        <a href="#" class="nav-icon" data-section="data-science">
+            <i class="fas fa-chart-bar"></i>
+            <span>Data Science</span>
+        </a>
+        
+        <a href="#" class="nav-icon" data-section="supply-chain">
+            <i class="fas fa-truck-loading"></i>
+            <span>SCM</span>
+        </a>
+        
+        <a href="#" class="nav-icon" data-section="project-management">
+            <i class="fas fa-project-diagram"></i>
+            <span>Project</span>
+        </a>
+        
+        <a href="#" class="nav-icon" data-section="bookmarks" id="bookmarksNavItem">
+            <i class="fas fa-bookmark"></i>
+            <span>Bookmark</span>
+            <span class="nav-badge" id="navBookmarkCounter" style="display: none;">0</span>
+        </a>
+    </nav>
     
     <script>
         // Data playlist dan video
@@ -897,7 +867,36 @@
                                 duration: "15:30",
                                 date: "10 Jan 2024",
                                 views: "1.2k",
-                                driveId: "1H01P-Ne28kb_1KU1HbEu1SVkYBYNIYKs",
+                                driveId: "1YgYMgc3E6jqB9e9qQZQ7TQ9XqZQ7TQ9X",
+                                bookmarked: false
+                            },
+                            {
+                                id: 102,
+                                title: "Persiapan dan Perencanaan Negosiasi",
+                                description: "Langkah-langkah persiapan dan perencanaan yang efektif sebelum memasuki proses negosiasi.",
+                                duration: "22:15",
+                                date: "12 Jan 2024",
+                                views: "950",
+                                driveId: "1YgYMgc3E6jqB9e9qQZQ7TQ9XqZQ7TQ9Y",
+                                bookmarked: false
+                            }
+                        ]
+                    },
+                    {
+                        id: "negotiation-2",
+                        title: "Strategi Negosiasi Win-Win Solution",
+                        description: "Mengembangkan strategi negosiasi yang menghasilkan solusi menguntungkan semua pihak.",
+                        thumbnail: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                        instructor: "Eva Marlina, M.T.",
+                        videos: [
+                            {
+                                id: 103,
+                                title: "Konsep Dasar Win-Win Solution",
+                                description: "Memahami filosofi dan prinsip dasar win-win solution dalam negosiasi.",
+                                duration: "16:45",
+                                date: "5 Feb 2024",
+                                views: "1.3k",
+                                driveId: "1YgYMgc3E6jqB9e9qQZQ7TQ9XqZQ7TQ9C",
                                 bookmarked: false
                             }
                         ]
@@ -1022,13 +1021,13 @@
             
             updateBookmarkCount: function() {
                 const bookmarks = this.getBookmarks();
-                const bookmarkCounter = document.getElementById('bookmarkCounter');
+                const navBookmarkCounter = document.getElementById('navBookmarkCounter');
                 
                 if (bookmarks.length > 0) {
-                    bookmarkCounter.textContent = bookmarks.length;
-                    bookmarkCounter.style.display = 'flex';
+                    navBookmarkCounter.textContent = bookmarks.length;
+                    navBookmarkCounter.style.display = 'flex';
                 } else {
-                    bookmarkCounter.style.display = 'none';
+                    navBookmarkCounter.style.display = 'none';
                 }
             }
         };
@@ -1040,73 +1039,72 @@
             activeVideo: null
         };
 
-        // Setup mobile navigation
-        function setupMobileNavigation() {
-            const sidebar = document.getElementById('sidebar');
-            const mobileToggle = document.getElementById('mobileToggle');
-            const sidebarOverlay = document.getElementById('sidebar-overlay');
-            const menuItems = document.querySelectorAll('.menu-item');
+        // Setup navbar navigation
+        function setupNavbarNavigation() {
+            const navItems = document.querySelectorAll('.nav-icon');
             
-            // Toggle sidebar on mobile button click
-            mobileToggle.addEventListener('click', (e) => {
-                e.stopPropagation();
-                toggleSidebar();
-            });
-            
-            // Close sidebar when clicking overlay
-            sidebarOverlay.addEventListener('click', () => {
-                closeSidebar();
-            });
-            
-            // Close sidebar when clicking menu items on mobile
-            menuItems.forEach(item => {
-                item.addEventListener('click', () => {
-                    if (window.innerWidth <= 1024) {
-                        closeSidebar();
+            navItems.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    // Hapus active dari semua item
+                    navItems.forEach(i => i.classList.remove('active'));
+                    
+                    // Tambahkan active ke item yang diklik
+                    item.classList.add('active');
+                    
+                    const section = item.dataset.section;
+                    
+                    // Sembunyikan semua bagian konten
+                    document.getElementById('welcomeSection').style.display = 'none';
+                    document.getElementById('categorySection').style.display = 'none';
+                    document.getElementById('videoSection').style.display = 'none';
+                    document.getElementById('videosSection').style.display = 'none';
+                    document.getElementById('searchBox').style.display = 'none';
+                    
+                    // Reset state
+                    currentState = {
+                        activeCategory: null,
+                        activePlaylist: null,
+                        activeVideo: null
+                    };
+                    
+                    // Reset video player
+                    document.getElementById('videoPlaceholder').style.display = 'block';
+                    document.getElementById('videoPlayer').style.display = 'none';
+                    document.getElementById('videoPlayer').src = '';
+                    document.getElementById('videoTitle').textContent = 'Belum ada video yang dipilih';
+                    document.getElementById('videoDescription').textContent = 'Pilih video dari daftar di bawah untuk melihat deskripsi lengkap';
+                    
+                    // Update judul halaman
+                    const pageTitle = document.getElementById('pageTitle');
+                    const pageSubtitle = document.getElementById('pageSubtitle');
+                    
+                    if (section === 'dashboard') {
+                        pageTitle.textContent = 'Dashboard';
+                        pageSubtitle.textContent = 'Upgrade Skill Teknik Industri Kamu di RUANG TI!';
+                        document.getElementById('welcomeSection').style.display = 'block';
+                    } 
+                    else if (section === 'bookmarks') {
+                        pageTitle.textContent = 'Bookmarks';
+                        pageSubtitle.textContent = 'Video yang telah Anda tandai';
+                        document.getElementById('videosSection').style.display = 'block';
+                        document.getElementById('searchBox').style.display = 'flex';
+                        document.getElementById('bookmarkInfo').style.display = 'block';
+                        document.getElementById('videosListTitle').textContent = 'Video Bookmark';
+                        document.getElementById('videosListSubtitle').textContent = 'Video yang telah Anda tandai';
+                        
+                        loadBookmarkedVideos();
+                    }
+                    else if (playlistsData[section]) {
+                        const category = playlistsData[section];
+                        pageTitle.textContent = category.title;
+                        pageSubtitle.textContent = category.description;
+                        document.getElementById('categorySection').style.display = 'block';
+                        
+                        loadPlaylists(section);
                     }
                 });
-            });
-            
-            // Close sidebar when pressing Escape key
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') {
-                    closeSidebar();
-                }
-            });
-            
-            function toggleSidebar() {
-                const isOpening = !sidebar.classList.contains('active');
-                
-                if (isOpening) {
-                    sidebar.classList.add('active');
-                    sidebarOverlay.classList.add('active');
-                    mobileToggle.innerHTML = '<i class="fas fa-times"></i>';
-                } else {
-                    closeSidebar();
-                }
-            }
-            
-            function closeSidebar() {
-                sidebar.classList.remove('active');
-                sidebarOverlay.classList.remove('active');
-                mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
-            }
-            
-            // Initial setup based on screen size
-            if (window.innerWidth > 1024) {
-                mobileToggle.style.display = 'none';
-            } else {
-                mobileToggle.style.display = 'flex';
-            }
-            
-            // Handle window resize
-            window.addEventListener('resize', () => {
-                if (window.innerWidth > 1024) {
-                    mobileToggle.style.display = 'none';
-                    closeSidebar();
-                } else {
-                    mobileToggle.style.display = 'flex';
-                }
             });
         }
 
@@ -1294,69 +1292,9 @@
                 }
             }
             
+            bookmarkManager.updateBookmarkCount();
             showNotification(bookmarkManager.isBookmarked(videoId) ? 
                 "Video ditambahkan ke bookmark" : "Video dihapus dari bookmark");
-        }
-
-        function setupSidebarNavigation() {
-            const menuItems = document.querySelectorAll('.menu-item');
-            
-            menuItems.forEach(item => {
-                item.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    
-                    menuItems.forEach(i => i.classList.remove('active'));
-                    item.classList.add('active');
-                    
-                    const section = item.dataset.section;
-                    
-                    document.getElementById('welcomeSection').style.display = 'none';
-                    document.getElementById('categorySection').style.display = 'none';
-                    document.getElementById('videoSection').style.display = 'none';
-                    document.getElementById('videosSection').style.display = 'none';
-                    document.getElementById('searchBox').style.display = 'none';
-                    
-                    currentState = {
-                        activeCategory: null,
-                        activePlaylist: null,
-                        activeVideo: null
-                    };
-                    
-                    document.getElementById('videoPlaceholder').style.display = 'block';
-                    document.getElementById('videoPlayer').style.display = 'none';
-                    document.getElementById('videoPlayer').src = '';
-                    document.getElementById('videoTitle').textContent = 'Belum ada video yang dipilih';
-                    document.getElementById('videoDescription').textContent = 'Pilih video dari daftar di samping untuk melihat deskripsi lengkap';
-                    
-                    const pageTitle = document.getElementById('pageTitle');
-                    const pageSubtitle = document.getElementById('pageSubtitle');
-                    
-                    if (section === 'dashboard') {
-                        pageTitle.textContent = 'Dashboard';
-                        pageSubtitle.textContent = 'Upgrade Skill Teknik Industri Kamu di RUANG TI!';
-                        document.getElementById('welcomeSection').style.display = 'block';
-                    } 
-                    else if (section === 'bookmarks') {
-                        pageTitle.textContent = 'Bookmarks';
-                        pageSubtitle.textContent = 'Video yang telah Anda tandai';
-                        document.getElementById('videosSection').style.display = 'block';
-                        document.getElementById('searchBox').style.display = 'flex';
-                        document.getElementById('bookmarkInfo').style.display = 'block';
-                        document.getElementById('videosListTitle').textContent = 'Video Bookmark';
-                        document.getElementById('videosListSubtitle').textContent = 'Video yang telah Anda tandai';
-                        
-                        loadBookmarkedVideos();
-                    }
-                    else if (playlistsData[section]) {
-                        const category = playlistsData[section];
-                        pageTitle.textContent = category.title;
-                        pageSubtitle.textContent = category.description;
-                        document.getElementById('categorySection').style.display = 'block';
-                        
-                        loadPlaylists(section);
-                    }
-                });
-            });
         }
 
         function loadBookmarkedVideos() {
@@ -1457,7 +1395,8 @@
             
             searchInput.addEventListener('input', (e) => {
                 const searchTerm = e.target.value.toLowerCase();
-                const activeSection = document.querySelector('.menu-item.active').dataset.section;
+                const activeNavItem = document.querySelector('.nav-icon.active');
+                const activeSection = activeNavItem ? activeNavItem.dataset.section : 'dashboard';
                 
                 if (searchTerm.length > 0) {
                     if (activeSection === 'bookmarks') {
@@ -1625,7 +1564,8 @@
         function setupBackButton() {
             const backButton = document.getElementById('backToPlaylist');
             backButton.addEventListener('click', () => {
-                const activeSection = document.querySelector('.menu-item.active').dataset.section;
+                const activeNavItem = document.querySelector('.nav-icon.active');
+                const activeSection = activeNavItem ? activeNavItem.dataset.section : 'dashboard';
                 
                 if (playlistsData[activeSection]) {
                     document.getElementById('categorySection').style.display = 'block';
@@ -1667,8 +1607,7 @@
 
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
-            setupMobileNavigation();
-            setupSidebarNavigation();
+            setupNavbarNavigation();
             setupSearch();
             setupBackButton();
             bookmarkManager.updateBookmarkCount();
@@ -1687,8 +1626,4 @@
         });
     </script>
 </body>
-
 </html>
-
-
-
